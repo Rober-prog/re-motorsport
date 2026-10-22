@@ -40,6 +40,14 @@ export default function HomePage() {
             decoding="async"
           />
         </picture>
+        <img
+          className="hero-corner-logo"
+          src={assetPath('/brand/car-emblem.webp')}
+          alt=""
+          aria-hidden="true"
+          width="768"
+          height="735"
+        />
         <div className="container hero-copy">
           <p className="eyebrow">
             <span className="tiny-line" />
