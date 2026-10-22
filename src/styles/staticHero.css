@@ -23,7 +23,7 @@
 }
 .hero-corner-logo {
   position: absolute;
-  top: 28px;
+  bottom: 28px;
   right: clamp(24px, 3vw, 48px);
   z-index: 5;
   width: clamp(80px, 7vw, 112px);
@@ -127,9 +127,8 @@
     filter: blur(1px);
   }
   .hero-corner-logo {
-    top: auto;
     right: 20px;
-    bottom: calc(var(--hero-mobile-photo-height) - 81px);
+    bottom: 20px;
     width: 64px;
   }
   .hero-photograph::after {
