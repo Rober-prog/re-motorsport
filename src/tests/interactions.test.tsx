@@ -7,7 +7,7 @@ import { createI18n } from '../lib/i18n';
 import { localeFromPath } from '../lib/routing';
 import { ContactForm } from '../components/forms/ContactForm';
 import { CatalogPage } from '../pages/ContentPages';
-function wrap(children: React.ReactNode, entry = '/contacto') {
+function wrap(children: React.ReactNode, entry = '/es/contacto') {
   return (
     <I18nextProvider i18n={createI18n(localeFromPath(entry))}>
       <MemoryRouter initialEntries={[entry]}>{children}</MemoryRouter>
@@ -16,7 +16,7 @@ function wrap(children: React.ReactNode, entry = '/contacto') {
 }
 describe('Formularios accesibles', () => {
   it('preselecciona la categoría recibida y anuncia errores', async () => {
-    render(wrap(<ContactForm />, '/contacto?categoria=frenos'));
+    render(wrap(<ContactForm />, '/es/contacto?categoria=frenos'));
     expect(screen.getByLabelText('Categoría de producto')).toHaveValue('frenos');
     await userEvent.click(screen.getByRole('button', { name: 'Enviar consulta' }));
     expect(await screen.findByText('Introduce un correo electrónico válido.')).toBeInTheDocument();
@@ -39,7 +39,7 @@ describe('Formularios accesibles', () => {
 });
 describe('Catálogo', () => {
   it('busca y muestra un estado vacío recuperable', async () => {
-    render(wrap(<CatalogPage />, '/catalogo'));
+    render(wrap(<CatalogPage />, '/es/catalogo'));
     const search = screen.getByRole('searchbox');
     await userEvent.type(search, 'zzzz');
     expect(screen.getByText('No encontramos esa categoría.')).toBeInTheDocument();

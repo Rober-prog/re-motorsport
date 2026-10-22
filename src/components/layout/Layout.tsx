@@ -137,17 +137,7 @@ function Footer() {
             {business.legalName} · NIF {business.taxId}
           </p>
         </div>
-        <div>
-          <h3>{t('footer.explore')}</h3>
-          <nav aria-label={t('footer.explore')}>
-            {[...navigation, ['/contacto', 'contact'] as const].map(([to, key]) => (
-              <Link key={to} to={path(to)}>
-                {t(`nav.${key}`)}
-              </Link>
-            ))}
-          </nav>
-        </div>
-        <div>
+        <div className="footer-legal">
           <h3>{t('footer.legal')}</h3>
           <nav aria-label={t('footer.legal')}>
             {[

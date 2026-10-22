@@ -14,7 +14,7 @@ for (const width of [360, 390, 768, 1440]) {
       if (/\.(glb|gltf)(\?|$)/.test(request.url())) models.push(request.url());
     });
     page.on('pageerror', (error) => errors.push(error.message));
-    for (const path of ['/', '/ca']) {
+    for (const path of ['/', '/es']) {
       await page.goto(path);
       const hero = page.locator('.hero-static');
       await expect(hero.locator('h1')).toBeVisible();

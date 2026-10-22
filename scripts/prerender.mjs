@@ -21,7 +21,7 @@ const structuredData = JSON.stringify({
       '@id': 'https://rmartorell.com/#website',
       url: 'https://rmartorell.com',
       name: 'Recanvis Martorell',
-      inLanguage: ['es', 'ca'],
+      inLanguage: ['ca', 'es'],
     },
     {
       '@type': 'Organization',
@@ -60,7 +60,10 @@ for (const url of [...paths, '/404']) {
   await fs.writeFile(target, output);
 }
 const root = 'https://rmartorell.com';
-const entries = paths.map((url) => `<url><loc>${root}${url}</loc></url>`).join('\n');
+const entries = paths
+  .filter((url) => !/^\/ca(?:\/|$)/.test(url))
+  .map((url) => `<url><loc>${root}${url}</loc></url>`)
+  .join('\n');
 await fs.writeFile(
   'dist/sitemap.xml',
   `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${entries}</urlset>`,

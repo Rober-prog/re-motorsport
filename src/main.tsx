@@ -2,7 +2,7 @@ import { hydrateRoot, createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
 import { createI18n } from './lib/i18n';
-import { localeFromPath } from './lib/routing';
+import { localeFromPath, localPath } from './lib/routing';
 import { appPath, assetPath, routerBasename } from './lib/basePath';
 import { App } from './app/App';
 import { ErrorBoundary } from './components/ui/Primitives';
@@ -11,6 +11,7 @@ import './styles/accessibility.css';
 import './styles/showroom.css';
 import './styles/brand.css';
 import './styles/staticHero.css';
+import './styles/footer.css';
 const locale = localeFromPath(appPath(window.location.pathname));
 const i18n = createI18n(locale);
 function Root() {
@@ -21,7 +22,7 @@ function Root() {
           fallback={
             <div className="app-error">
               <h1>{i18n.t('common.error')}</h1>
-              <a href={assetPath(locale === 'ca' ? '/ca' : '/')}>{i18n.t('notFound.cta')}</a>
+              <a href={assetPath(localPath('/', locale))}>{i18n.t('notFound.cta')}</a>
             </div>
           }
         >

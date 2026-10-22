@@ -2,6 +2,8 @@
 
 Web corporativa bilingüe ES/CA con catálogo informativo, portada fotográfica y consultas comerciales. Repositorio público con despliegue automático en GitHub Pages.
 
+El catalán es el idioma predeterminado: las rutas sin prefijo muestran catalán y `/es/...` muestra castellano. Los enlaces antiguos `/ca/...` siguen funcionando en catalán.
+
 La portada actual utiliza una imagen fija optimizada para escritorio y móvil. Se han eliminado la animación del coche, los puntos interactivos y las tarjetas flotantes. [Imagen, prompt y detalles de la portada](docs/static-hero.md).
 
 Se han integrado los dos logotipos aportados, dando protagonismo al emblema del coche en la portada, la cabecera, el pie y el favicon. [Archivos y uso de la marca](docs/brand.md).
@@ -35,8 +37,8 @@ La previsualización estática se abre en http://127.0.0.1:4173 y sirve el HTML 
 - React, TypeScript estricto, Vite, Tailwind 4 y tokens centralizados.
 - Todas las páginas solicitadas, 11 categorías y fichas de familias orientativas.
 - Búsqueda sin acentos, filtros, estado vacío y consulta con categoría preseleccionada.
-- Español y catalán con URLs estables: `/...` y `/ca/...`, cambio de idioma que conserva ruta y consulta.
-- 42 páginas HTML prerenderizadas, además de 404. Contenido comercial accesible sin JavaScript.
+- Catalán por defecto en `/...` y castellano en `/es/...`; cambio de idioma que conserva ruta y consulta. Compatibilidad con los enlaces `/ca/...`.
+- 42 páginas HTML canónicas y 21 alias `/ca` prerenderizados, además de 404. Contenido comercial accesible sin JavaScript.
 - Titles, descripciones, canonical, hreflang, Open Graph, Twitter Cards, sitemap, robots y datos estructurados mínimos sin dirección inventada.
 - Portada fotográfica con deportivo grafito en un taller, imágenes WebP adaptadas a móvil y escritorio y acceso directo al catálogo.
 - Sin WebGL, animación del coche, puntos interactivos ni descargas de modelos. Título, imagen y enlaces disponibles sin JavaScript.

@@ -7,7 +7,7 @@ export function createI18n(locale: Locale) {
   void instance.use(initReactI18next).init({
     resources,
     lng: locale,
-    fallbackLng: 'es',
+    fallbackLng: 'ca',
     initAsync: false,
     interpolation: { escapeValue: false },
     react: { useSuspense: false },

@@ -11,7 +11,7 @@ export const baseRoutes = [
   '/privacidad',
   '/cookies',
 ];
-export const localeFromPath = (path: string): Locale => (/^\/ca(?:\/|$)/.test(path) ? 'ca' : 'es');
-export const withoutLocale = (path: string) => path.replace(/^\/ca(?=\/|$)/, '') || '/';
+export const localeFromPath = (path: string): Locale => (/^\/es(?:\/|$)/.test(path) ? 'es' : 'ca');
+export const withoutLocale = (path: string) => path.replace(/^\/(?:ca|es)(?=\/|$)/, '') || '/';
 export const localPath = (path: string, locale: Locale) =>
-  locale === 'ca' ? `/ca${path === '/' ? '' : path}` : path;
+  locale === 'es' ? `/es${path === '/' ? '' : path}` : path;

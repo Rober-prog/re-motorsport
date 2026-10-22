@@ -44,7 +44,7 @@ function Seo() {
       ['canonical', seo.canonical],
       ['es', seo.es],
       ['ca', seo.ca],
-      ['x-default', seo.es],
+      ['x-default', seo.ca],
     ]) {
       let el = document.head.querySelector<HTMLLinkElement>(
         key === 'canonical' ? 'link[rel="canonical"]' : `link[hreflang="${key}"]`,
@@ -65,7 +65,7 @@ export function App() {
     <>
       <Seo />
       <Routes>
-        {['', '/ca'].map((prefix) => (
+        {['', '/es', '/ca'].map((prefix) => (
           <Route key={prefix} element={<Layout />}>
             <Route path={prefix || '/'} element={<HomePage />} />
             <Route path={`${prefix}/empresa`} element={<CompanyPage />} />

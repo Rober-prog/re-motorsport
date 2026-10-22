@@ -31,7 +31,7 @@ export function seoForPath(pathname: string) {
     title: `${title || '404'} · Recanvis Martorell`,
     description,
     canonical: `${origin}${localPath(path, locale)}`,
-    es: `${origin}${path}`,
+    es: `${origin}${localPath(path, 'es')}`,
     ca: `${origin}${localPath(path, 'ca')}`,
     found,
   };
@@ -40,5 +40,5 @@ export function headForPath(pathname: string) {
   const seo = seoForPath(pathname);
   const escape = (s: string) =>
     s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-  return `<title>${escape(seo.title)}</title>\n<meta name="description" content="${escape(seo.description)}" />\n<meta name="robots" content="${seo.found ? 'index,follow' : 'noindex,follow'}" />\n<link rel="canonical" href="${escape(seo.canonical)}" />\n<link rel="alternate" hreflang="es" href="${escape(seo.es)}" />\n<link rel="alternate" hreflang="ca" href="${escape(seo.ca)}" />\n<link rel="alternate" hreflang="x-default" href="${escape(seo.es)}" />\n<meta property="og:title" content="${escape(seo.title)}" />\n<meta property="og:description" content="${escape(seo.description)}" />\n<meta property="og:url" content="${escape(seo.canonical)}" />\n<meta property="og:type" content="website" />\n<meta property="og:locale" content="${seo.locale === 'ca' ? 'ca_ES' : 'es_ES'}" />\n<meta property="og:image" content="${origin}/images/social.jpg" />\n<meta name="twitter:card" content="summary_large_image" />\n<meta name="twitter:title" content="${escape(seo.title)}" />\n<meta name="twitter:description" content="${escape(seo.description)}" />\n<meta name="twitter:image" content="${origin}/images/social.jpg" />`;
+  return `<title>${escape(seo.title)}</title>\n<meta name="description" content="${escape(seo.description)}" />\n<meta name="robots" content="${seo.found ? 'index,follow' : 'noindex,follow'}" />\n<link rel="canonical" href="${escape(seo.canonical)}" />\n<link rel="alternate" hreflang="es" href="${escape(seo.es)}" />\n<link rel="alternate" hreflang="ca" href="${escape(seo.ca)}" />\n<link rel="alternate" hreflang="x-default" href="${escape(seo.ca)}" />\n<meta property="og:title" content="${escape(seo.title)}" />\n<meta property="og:description" content="${escape(seo.description)}" />\n<meta property="og:url" content="${escape(seo.canonical)}" />\n<meta property="og:type" content="website" />\n<meta property="og:locale" content="${seo.locale === 'ca' ? 'ca_ES' : 'es_ES'}" />\n<meta property="og:image" content="${origin}/images/social.jpg" />\n<meta name="twitter:card" content="summary_large_image" />\n<meta name="twitter:title" content="${escape(seo.title)}" />\n<meta name="twitter:description" content="${escape(seo.description)}" />\n<meta name="twitter:image" content="${origin}/images/social.jpg" />`;
 }

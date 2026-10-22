@@ -73,10 +73,15 @@ describe('Validación de consultas', () => {
 });
 describe('Rutas localizadas', () => {
   it('conserva la ruta al cambiar de idioma', () => {
-    expect(localPath('/catalogo/frenos', 'ca')).toBe('/ca/catalogo/frenos');
+    expect(localPath('/catalogo/frenos', 'ca')).toBe('/catalogo/frenos');
+    expect(localPath('/catalogo/frenos', 'es')).toBe('/es/catalogo/frenos');
+    expect(localPath('/', 'es')).toBe('/es');
     expect(withoutLocale('/ca/catalogo/frenos')).toBe('/catalogo/frenos');
-    expect(localeFromPath('/catalogo')).toBe('es');
+    expect(withoutLocale('/es/catalogo/frenos')).toBe('/catalogo/frenos');
+    expect(localeFromPath('/')).toBe('ca');
+    expect(localeFromPath('/catalogo')).toBe('ca');
     expect(localeFromPath('/ca')).toBe('ca');
-    expect(localeFromPath('/catalogo/carroceria')).toBe('es');
+    expect(localeFromPath('/es/catalogo/carroceria')).toBe('es');
+    expect(localeFromPath('/escape')).toBe('ca');
   });
 });

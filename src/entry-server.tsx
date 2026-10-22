@@ -11,7 +11,7 @@ import { assetPath, routerBasename } from './lib/basePath';
 export const paths = [
   ...baseRoutes,
   ...activeCategories().map((c) => `/catalogo/${c.slug}`),
-].flatMap((path) => [path, localPath(path, 'ca')]);
+].flatMap((path) => [path, localPath(path, 'es'), `/ca${path === '/' ? '' : path}`]);
 export function render(path: string) {
   const locale = localeFromPath(path);
   const i18n = createI18n(locale);

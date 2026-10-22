@@ -29,7 +29,7 @@ test('las 42 páginas comerciales contienen HTML indexable en ambos idiomas', as
   request,
 }) => {
   for (const base of [...routes, ...slugs.map((s) => `/catalogo/${s}`)])
-    for (const prefix of ['', '/ca']) {
+    for (const prefix of ['', '/es']) {
       const path = prefix + (base === '/' ? '' : base) || '/';
       const response = await request.get(path);
       expect(response.status(), path).toBe(200);
@@ -37,16 +37,16 @@ test('las 42 páginas comerciales contienen HTML indexable en ambos idiomas', as
       expect(html, path).toContain('<h1');
       expect(html, path).toContain('<link rel="canonical"');
       expect(html, path).toContain(`href="https://rmartorell.com${path}"`);
-      expect(html, path).toContain(`<html lang="${prefix ? 'ca' : 'es'}"`);
+      expect(html, path).toContain(`<html lang="${prefix ? 'es' : 'ca'}"`);
       expect(html, path).toContain('hreflang="ca"');
       expect(html, path).not.toContain('<!--app-html-->');
     }
 });
 test('datos de empresa en ES/CA y cautelas en los metadatos', async ({ request }) => {
-  for (const prefix of ['', '/ca']) {
+  for (const prefix of ['', '/es']) {
     const company = await (await request.get(`${prefix}/empresa`)).text();
     expect(company).toContain('RECANVIS MARTORELL SL');
-    expect(company).toMatch(prefix ? /2 de gener (?:de|del) 1994/ : /2 de enero de 1994/);
+    expect(company).toMatch(prefix ? /2 de enero de 1994/ : /2 de gener (?:de|del) 1994/);
     expect(company).not.toMatch(/(?:Desde|Des de) 1994/);
     const contact = await (await request.get(`${prefix}/contacto`)).text();
     expect(contact).toContain('Carretera de Piera, 4');
@@ -74,13 +74,13 @@ test('datos de empresa en ES/CA y cautelas en los metadatos', async ({ request }
 test('el catálogo funciona sin JavaScript', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
-  await page.goto('http://127.0.0.1:4173/catalogo');
+  await page.goto('http://127.0.0.1:4173/es/catalogo');
   await expect(page.locator('.category-card')).toHaveCount(11);
   await expect(page.locator('h1')).toContainText('La pieza que buscas.');
   await context.close();
 });
 test('idioma, navegación, filtros y consulta de categoría', async ({ page }) => {
-  await page.goto('/catalogo');
+  await page.goto('/es/catalogo');
   await page.getByRole('searchbox').fill('frenos');
   await expect(page.locator('.category-card')).toHaveCount(1);
   await page.getByRole('link', { name: 'CA — Català', exact: true }).click();
@@ -100,7 +100,7 @@ test('validación y bloqueo honesto del envío', async ({ page }) => {
   page.on('request', (request) => {
     if (request.url().includes('/api/contact')) calls++;
   });
-  await page.goto('/contacto');
+  await page.goto('/es/contacto');
   await page.getByRole('button', { name: 'Enviar consulta', exact: true }).click();
   await expect(page.getByRole('alert')).toContainText('Revisa los campos indicados');
   await page.getByLabel(/Nombre y apellidos/).fill('Cliente de prueba');
@@ -135,7 +135,7 @@ test('contraste y semántica con axe en páginas representativas', async ({ page
   test.setTimeout(180000);
   const auditPaths = [...routes, '/catalogo/frenos'].flatMap((path) => [
     path,
-    path === '/' ? '/ca' : `/ca${path}`,
+    path === '/' ? '/es' : `/es${path}`,
   ]);
   for (const path of auditPaths) {
     await page.goto(path);
@@ -154,7 +154,7 @@ test('contraste y semántica con axe en páginas representativas', async ({ page
   }
 });
 test('404 mantiene navegación y metadatos noindex', async ({ page }) => {
-  await page.goto('/ruta-inexistente');
+  await page.goto('/es/ruta-inexistente');
   await expect(page.locator('h1')).toContainText('Esta ruta no lleva');
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex,follow');
 });
