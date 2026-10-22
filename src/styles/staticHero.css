@@ -18,8 +18,6 @@
   height: 100%;
   object-fit: cover;
   object-position: 65% 58%;
-  filter: blur(1.4px);
-  transform: scale(1.012);
 }
 .hero-corner-logo {
   position: absolute;
@@ -124,7 +122,6 @@
   }
   .hero-photograph img {
     object-position: 90% 60%;
-    filter: blur(1px);
   }
   .hero-corner-logo {
     right: 20px;

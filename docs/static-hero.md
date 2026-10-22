@@ -4,7 +4,7 @@ Se ha sustituido el explorador 3D por una fotografía fija de un deportivo grafi
 
 La portada funciona sin JavaScript. En móvil, el texto ocupa la parte superior y la fotografía la inferior. La imagen es decorativa y utiliza `alt=""`; el título y los enlaces son HTML accesible, independientes de la imagen.
 
-El logotipo circular aportado aparece pequeño en la esquina inferior derecha de la fotografía: blanco y con un halo de neón blanco/turquesa suave. Utiliza `public/brand/car-emblem.webp`, derivado del mismo original PNG facilitado por el usuario; el color y el halo se aplican con CSS para conservar el dibujo. La fotografía lleva un desenfoque ligero (1,4 px en escritorio y 1 px en móvil). El texto y el logo permanecen nítidos.
+El logotipo circular aportado aparece pequeño en la esquina inferior derecha de la fotografía: blanco y con un halo de neón blanco/turquesa suave. Utiliza `public/brand/car-emblem.webp`, derivado del mismo original PNG facilitado por el usuario; el color y el halo se aplican con CSS para conservar el dibujo. La fotografía, el texto y el logo se muestran nítidos, sin desenfoque en el fondo.
 
 ## Imágenes
 
