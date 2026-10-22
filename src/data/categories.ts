@@ -100,7 +100,7 @@ export const categories: Category[] = [
     ['Panells', 'Para-xocs', 'Motllures'],
     'car',
     'equipment',
-    5,
+    8,
   ),
   entry(
     'retrovisores-accesorios',
@@ -129,15 +129,16 @@ export const categories: Category[] = [
   ),
   entry(
     'sistema-electrico',
-    'Sistema eléctrico y batería',
-    'Sistema elèctric i bateria',
+    'Batería - Sistema Eléctrico',
+    'Bateria - Sistema Elèctric',
     'La energía detrás de cada trayecto. Consulta por los componentes eléctricos.',
     'L’energia darrere de cada trajecte. Consulta pels components elèctrics.',
     ['Baterías', 'Alternadores', 'Arranque'],
     ['Bateries', 'Alternadors', 'Arrencada'],
     'battery',
     'maintenance',
-    8,
+    5,
+    '/images/categories/sistema-electrico.webp',
   ),
   entry(
     'climatizacion',
