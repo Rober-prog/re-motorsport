@@ -63,6 +63,7 @@ export const categories: Category[] = [
     'disc',
     'mechanics',
     2,
+    '/images/categories/frenos.webp',
   ),
   entry(
     'motor',
