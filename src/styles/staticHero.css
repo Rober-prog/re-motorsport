@@ -51,20 +51,6 @@
   line-height: 1.65;
   margin-top: 20px;
 }
-.hero-static .hero-actions {
-  margin-top: 25px;
-  gap: 28px;
-}
-.hero-static .hero-actions .button {
-  min-height: 48px;
-  font-size: 12px;
-}
-.hero-static .hero-actions .text-link {
-  font-size: 12px;
-}
-.hero-static .hero-bottom {
-  bottom: 26px;
-}
 @media (min-width: 1600px) {
   .hero.hero-static {
     height: 850px;
@@ -108,16 +94,6 @@
     max-width: 340px;
     margin-top: 18px;
   }
-  .hero-static .hero-actions {
-    flex-wrap: wrap;
-    gap: 12px 22px;
-    margin-top: 22px;
-  }
-  .hero-static .hero-actions .button {
-    padding: 14px 17px;
-    gap: 16px;
-    font-size: 11px;
-  }
   .hero-photograph {
     top: auto;
     height: clamp(260px, 77vw, 360px);
@@ -142,8 +118,5 @@
       transparent 75%,
       #32373e80 100%
     );
-  }
-  .hero-static .hero-bottom {
-    display: none;
   }
 }

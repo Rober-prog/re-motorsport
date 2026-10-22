@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowDownRight, ArrowUpRight, Check, ChevronRight, Wrench } from 'lucide-react';
+import { ArrowUpRight, Check, ChevronRight, Wrench } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { activeCategories } from '../data/categories';
@@ -29,10 +29,10 @@ export default function HomePage() {
         <picture className="hero-photograph">
           <source
             media="(max-width: 639px)"
-            srcSet={assetPath('/images/hero-garage-mobile.webp')}
+            srcSet={assetPath('/images/hero-garage-turquoise-mobile.webp')}
           />
           <img
-            src={assetPath('/images/hero-garage.webp')}
+            src={assetPath('/images/hero-garage-turquoise.webp')}
             alt=""
             width="1672"
             height="941"
@@ -52,22 +52,6 @@ export default function HomePage() {
             <br className="mobile-break" /> {t('hero.line3')}
           </h1>
           <p className="hero-subtitle">{t('hero.subtitle')}</p>
-          <div className="hero-actions">
-            <a className="button button-primary" href="#categories">
-              {t('hero.cta')}
-              <ArrowDownRight size={19} />
-            </a>
-            <Link className="text-link" to={path('/contacto')}>
-              {t('nav.contact')}
-              <ArrowUpRight size={17} />
-            </Link>
-          </div>
-        </div>
-        <div className="hero-bottom container">
-          <a href="#categories">
-            {t('hero.scroll')}
-            <ArrowDown size={17} />
-          </a>
         </div>
       </section>
       <section className="categories-section section-padding" id="categories">

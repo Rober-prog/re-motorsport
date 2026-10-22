@@ -18,7 +18,7 @@ for (const width of [360, 390, 768, 1440]) {
       await page.goto(path);
       const hero = page.locator('.hero-static');
       await expect(hero.locator('h1')).toBeVisible();
-      await expect(hero.locator('.hero-actions .button')).toHaveAttribute('href', '#categories');
+      await expect(hero.locator('a, button, .hero-actions, .hero-bottom')).toHaveCount(0);
       await expect(page.locator('canvas, .hotspot, .vehicle-popup, .vehicle-controls')).toHaveCount(
         0,
       );
@@ -30,12 +30,12 @@ for (const width of [360, 390, 768, 1440]) {
       if (width < 640) {
         await expect
           .poll(() => image.evaluate((img: HTMLImageElement) => img.currentSrc))
-          .toContain('hero-garage-mobile.webp');
+          .toContain('hero-garage-turquoise-mobile.webp');
       }
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
         true,
       );
-      await hero.locator('.hero-actions .button').click();
+      await page.locator('#categories').scrollIntoViewIfNeeded();
       await expect(page.locator('#categories')).toBeInViewport();
       await expect(page.locator('#categories .category-card')).toHaveCount(6);
     }
@@ -53,7 +53,8 @@ test('la imagen, el texto y los enlaces de portada funcionan sin JavaScript', as
   await page.goto('/');
   await expect(page.locator('.hero-static h1')).toBeVisible();
   await expect(page.locator('.hero-photograph img')).toBeVisible();
-  await page.locator('.hero-actions .button').click();
+  await expect(page.locator('.hero-static a, .hero-static button')).toHaveCount(0);
+  await page.locator('#categories').scrollIntoViewIfNeeded();
   await expect(page.locator('#categories')).toBeInViewport();
   await page.locator('#categories .category-card').first().click();
   await expect(page).toHaveURL(/\/catalogo\//);
