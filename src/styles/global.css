@@ -541,6 +541,17 @@ main {
   object-fit: cover;
   object-position: center;
 }
+@media (min-width: 640px) {
+  .home-category-grid .category-illustration.category-illustration-photo,
+  .catalog-grid .category-illustration.category-illustration-photo {
+    height: auto;
+    aspect-ratio: 3 / 2;
+    flex-shrink: 0;
+  }
+  .category-illustration-photo .category-card-photo {
+    object-fit: contain;
+  }
+}
 .category-card:hover .category-illustration > svg {
   color: #60bed2;
   transform: rotate(-7deg) scale(1.04);
