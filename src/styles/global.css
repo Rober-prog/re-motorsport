@@ -1192,6 +1192,19 @@ main {
   transform: rotate(-18deg);
   filter: drop-shadow(10px 18px 3px #0005);
 }
+.category-detail-art.category-detail-photo {
+  display: block;
+  min-height: 0;
+  align-self: center;
+  overflow: hidden;
+  background: none;
+}
+.category-detail-photo > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
 .category-detail-art > span {
   position: absolute;
   bottom: 25px;

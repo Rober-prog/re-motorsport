@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { activeCategories, filterCategories } from '../data/categories';
 import { localeFromPath } from '../lib/routing';
+import { assetPath } from '../lib/basePath';
 import { business, businessAddress, businessValues, incorporationDate } from '../lib/business';
 import {
   ActionLink,
@@ -121,9 +122,25 @@ export function CategoryPage() {
               {t('catalog.consult')}
             </ActionLink>
           </div>
-          <div className="category-detail-art" aria-hidden="true">
-            <CategoryIcon name={category.icon} size={190} strokeWidth={0.7} />
-            <span>{String(category.order).padStart(2, '0')} / RM</span>
+          <div
+            className={`category-detail-art${category.image ? ' category-detail-photo' : ''}`}
+            aria-hidden={category.image ? undefined : true}
+          >
+            {category.image ? (
+              <img
+                src={assetPath(category.image)}
+                alt={category.name[locale]}
+                width="960"
+                height="640"
+                fetchPriority="high"
+                decoding="async"
+              />
+            ) : (
+              <>
+                <CategoryIcon name={category.icon} size={190} strokeWidth={0.7} />
+                <span>{String(category.order).padStart(2, '0')} / RM</span>
+              </>
+            )}
           </div>
         </div>
         <section className="families-section">
