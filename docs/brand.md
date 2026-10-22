@@ -9,8 +9,8 @@ Las copias originales se conservan en `assets/brand/originals/wordmark.png` y `a
 
 ## Aplicación
 
-- Cabecera y menú móvil: ambos logos juntos sobre una base clara que conserva el negro y el azul.
-- Portada: emblema del coche de mayor tamaño en la zona superior derecha, con contraste blanco aplicado mediante CSS. Se adapta en tableta y móvil para dejar libre el titular y el vehículo.
+- Cabecera y menú móvil: ambos logos juntos sobre una base clara. Todas las letras del logotipo horizontal, incluida la línea «martorell», utilizan el turquesa `#60BED2`. Un filtro SVG aplica el color exacto sobre la transparencia original y conserva las formas de las letras.
+- Portada: emblema del coche pequeño en la esquina inferior derecha, blanco y con un halo de neón suave. Se adapta a tableta y móvil.
 - Pie: ambos logos con el emblema del coche ampliado.
 - Pestaña del navegador: favicon del emblema circular sobre fondo blanco.
 
@@ -23,4 +23,4 @@ node scripts/prepare-brand.mjs
 npm run build
 ```
 
-Presentación: `src/styles/brand.css`. Componentes: `src/components/layout/Layout.tsx` y `src/pages/HomePage.tsx`. Captura de la portada: [home-brand.png](previews/home-brand.png).
+Presentación: `src/styles/brand.css`. Componentes: `src/components/layout/Layout.tsx` y `src/pages/HomePage.tsx`. Captura del logotipo turquesa: [brand-turquoise.png](previews/brand-turquoise.png).

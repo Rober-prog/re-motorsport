@@ -218,6 +218,10 @@ export function Layout() {
               values="0 0 0.2614 0 0.1961  0 0 0.767 0 0.2157  0 0 0.8409 0 0.2431  0 0 0 1 0"
             />
           </filter>
+          <filter id="corporate-wordmark-turquoise" colorInterpolationFilters="sRGB">
+            <feFlood floodColor="#60BED2" result="turquoise" />
+            <feComposite in="turquoise" in2="SourceAlpha" operator="in" />
+          </filter>
         </defs>
       </svg>
       <Header />

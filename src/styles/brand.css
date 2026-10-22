@@ -16,7 +16,7 @@
   flex-shrink: 0;
 }
 .brand-wordmark {
-  filter: url('#corporate-logo-colors');
+  filter: url('#corporate-wordmark-turquoise');
   width: 174px;
   height: 58px;
   object-fit: contain;
