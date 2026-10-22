@@ -1,0 +1,32 @@
+{
+  "name": "Recanvis Martorell",
+  "legalName": "RECANVIS MARTORELL SL",
+  "taxId": "B60408010",
+  "legalForm": "Sociedad limitada",
+  "incorporationDate": "1994-01-02",
+  "cnaePublished": "4672",
+  "address": {
+    "streetAddress": "Carretera de Piera, 4",
+    "postalCode": "08760",
+    "addressLocality": "Martorell",
+    "addressRegion": "Barcelona",
+    "addressCountry": "ES"
+  },
+  "addressVariant": "Carretera de Piera, 4A",
+  "streetNumberConfirmed": false,
+  "registry": {
+    "register": "Barcelona",
+    "volume": "26389",
+    "folio": "39",
+    "sheet": "B-102056",
+    "entry": "3",
+    "currentValidityConfirmed": false
+  },
+  "corporateWebsite": "https://www.rmartorell.com",
+  "classicStore": "https://recambiosclasicos.com",
+  "sources": {
+    "municipal": "https://moliempresa.martorell.cat/directori-empreses/recanvis-martorell/",
+    "storeTerms": "https://recambiosclasicos.com/terminos-y-condiciones/",
+    "companyDirectory": "https://www.iberinform.es/empresa/1388746/recanvis-martorell"
+  }
+}

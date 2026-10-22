@@ -1,0 +1,8 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "recanvis-martorell",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-10-20",
+  // Add the CONTACT_RATE_DB D1 binding after the user provisions it.
+  // See docs/cloudflare.md. Until then, contact returns 503.
+}

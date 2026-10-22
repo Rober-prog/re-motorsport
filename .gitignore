@@ -1,0 +1,17 @@
+node_modules/
+.cache/
+dist/
+.ssr/
+.analysis/
+.env
+.env.local
+.env.*
+!.env.example
+.dev.vars
+.wrangler/
+test-results/
+playwright-report/
+coverage/
+*.log
+*.bundle
+recanvis-martorell-github.zip

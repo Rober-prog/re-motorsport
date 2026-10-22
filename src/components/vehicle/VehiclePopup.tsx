@@ -1,0 +1,69 @@
+import { useEffect, useRef } from 'react';
+import { X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
+import { activeCategories } from '../../data/categories';
+import { vehicleHotspots } from '../../data/vehicleHotspots';
+import { localeFromPath } from '../../lib/routing';
+import { ActionLink } from '../ui/Primitives';
+import { CategoryIcon } from '../ui/CategoryIcon';
+import { useVehicleInteraction } from './VehicleInteractionProvider';
+import { useVehiclePopupPosition } from '../../hooks/useVehiclePopupPosition';
+export function VehiclePopup() {
+  const interaction = useVehicleInteraction();
+  const { t } = useTranslation();
+  const locale = localeFromPath(useLocation().pathname);
+  const ref = useRef<HTMLElement>(null);
+  const placement = useVehiclePopupPosition(ref);
+  const category = activeCategories().find((c) => c.id === interaction.selected);
+  const point = vehicleHotspots.find((p) => p.id === interaction.selected);
+  useEffect(() => {
+    if (interaction.pinned && interaction.selected) ref.current?.focus({ preventScroll: true });
+  }, [interaction.pinned, interaction.selected]);
+  if (!category || !point) return null;
+  return (
+    <>
+      {placement && (
+        <svg className="popup-connector" aria-hidden="true">
+          <path d={placement.path} />
+        </svg>
+      )}
+      <aside
+        ref={ref}
+        id="vehicle-popup"
+        className="vehicle-popup"
+        data-placement={placement ? 'anchored' : undefined}
+        style={placement ? { left: placement.left, top: placement.top, bottom: 'auto' } : undefined}
+        tabIndex={-1}
+        role={interaction.pinned ? 'dialog' : 'region'}
+        aria-labelledby="vehicle-popup-title"
+        onPointerEnter={interaction.cancelClose}
+        onPointerLeave={interaction.scheduleClose}
+        onFocus={interaction.cancelClose}
+        onBlur={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget)) interaction.scheduleClose();
+        }}
+      >
+        <button
+          className="icon-button popup-close"
+          aria-label={t('common.close')}
+          onClick={interaction.close}
+        >
+          <X size={17} />
+        </button>
+        <div className="popup-heading">
+          <div className="popup-icon">
+            <CategoryIcon name={category.icon} size={28} strokeWidth={1.2} />
+          </div>
+          <div>
+            <p className="eyebrow">RM / {String(category.order).padStart(2, '0')}</p>
+            <h2 id="vehicle-popup-title">{category.name[locale]}</h2>
+          </div>
+        </div>
+        <p>{category.description[locale]}</p>
+        <ActionLink to={point.destination}>{t(point.ctaKey)}</ActionLink>
+        <span className="popup-provisional">{t('common.provisional')}</span>
+      </aside>
+    </>
+  );
+}

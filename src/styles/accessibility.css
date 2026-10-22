@@ -1,0 +1,75 @@
+/* Anthracite text keeps the corporate turquoise surfaces readable. */
+.button-primary {
+  background: #60bed2;
+}
+.button-primary:hover {
+  background: color-mix(in srgb, var(--turquoise) 88%, white);
+}
+.contact-banner {
+  background: #60bed2;
+}
+.contact-banner .eyebrow {
+  color: var(--anthracite);
+}
+.contact-wordmark,
+.statement-mark,
+.classic-banner > span {
+  color: #60bed2;
+}
+.section-description,
+.company-copy > p:not(.eyebrow),
+.professional-panel p:not(.eyebrow),
+.editorial-card > p:not(.eyebrow),
+.value-item p,
+.hero-subtitle {
+  font-size: 14px;
+}
+.category-card h3,
+.catalog-grid .category-card h3 {
+  font-size: 14px;
+}
+.category-card p,
+.catalog-grid .category-card p,
+.footer-top nav a,
+.footer-brand > p {
+  font-size: 12px;
+}
+.footer-bottom {
+  font-size: 10px;
+}
+.hero-actions .button,
+.hero-actions .text-link {
+  font-size: 12px;
+}
+@media (min-width: 1200px) {
+  .desktop-nav a {
+    font-size: 12px;
+  }
+}
+.vehicle-category-access {
+  display: block;
+  bottom: 90px;
+}
+.vehicle-category-access select {
+  min-height: 38px;
+  max-width: 205px;
+  border-radius: 5px;
+  padding: 8px 12px;
+}
+@media (max-width: 1199px) {
+  .vehicle-category-access {
+    left: 36px;
+  }
+}
+@media (max-width: 639px) {
+  .vehicle-category-access {
+    left: 32px;
+    bottom: 6px;
+  }
+  .vehicle-category-access select {
+    min-height: 33px;
+    font-size: 8px;
+    max-width: 150px;
+    padding: 5px 8px;
+  }
+}
