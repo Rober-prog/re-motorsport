@@ -13,7 +13,7 @@ const routes = [
   '/cookies',
 ];
 const slugs = [
-  'ruedas-neumaticos',
+  'mecanica',
   'frenos',
   'motor',
   'iluminacion',

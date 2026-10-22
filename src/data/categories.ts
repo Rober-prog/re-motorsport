@@ -7,6 +7,7 @@ export interface Category {
   description: Localized;
   families: Record<Locale, string[]>;
   icon: string;
+  image?: string;
   group: 'maintenance' | 'mechanics' | 'equipment';
   active: boolean;
   order: number;
@@ -23,6 +24,7 @@ const entry = (
   icon: string,
   group: Category['group'],
   order: number,
+  image?: string,
 ): Category => ({
   id,
   slug: id,
@@ -34,19 +36,21 @@ const entry = (
   active: true,
   order,
   publication: 'provisional',
+  image,
 });
 export const categories: Category[] = [
   entry(
-    'ruedas-neumaticos',
-    'Ruedas y neumáticos',
-    'Rodes i pneumàtics',
-    'El contacto con la carretera empieza aquí. Cuéntanos qué necesitas para tu vehículo.',
-    'El contacte amb la carretera comença aquí. Explica’ns què necessites per al teu vehicle.',
-    ['Neumáticos', 'Llantas', 'Accesorios de rueda'],
-    ['Pneumàtics', 'Llandes', 'Accessoris de roda'],
-    'wheel',
-    'maintenance',
+    'mecanica',
+    'Mecánica',
+    'Mecànica',
+    'Componentes para el motor, la distribución y la refrigeración. Cuéntanos qué necesita tu vehículo.',
+    'Components per al motor, la distribució i la refrigeració. Explica’ns què necessita el teu vehicle.',
+    ['Motor', 'Distribución', 'Refrigeración'],
+    ['Motor', 'Distribució', 'Refrigeració'],
+    'engine',
+    'mechanics',
     1,
+    '/images/categories/mecanica.webp',
   ),
   entry(
     'frenos',

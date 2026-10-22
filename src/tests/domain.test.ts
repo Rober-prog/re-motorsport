@@ -19,7 +19,7 @@ describe('Catálogo', () => {
     expect(new Set(categories.map((category) => category.slug)).size).toBe(11);
   });
   it('busca sin acentos y por familias, respetando filtros', () => {
-    expect(filterCategories('neumaticos', 'all').map((c) => c.id)).toEqual(['ruedas-neumaticos']);
+    expect(filterCategories('mecanica', 'all').map((c) => c.id)).toEqual(['mecanica']);
     expect(filterCategories('Pastillas', 'mechanics')[0].id).toBe('frenos');
     expect(filterCategories('pastillas', 'maintenance')).toHaveLength(0);
     expect(filterCategories('no-existe', 'all')).toHaveLength(0);
