@@ -51,6 +51,15 @@
   line-height: 1.65;
   margin-top: 20px;
 }
+@media (min-width: 640px) {
+  .hero.hero-static {
+    display: flex;
+    align-items: center;
+  }
+  .hero-static .hero-copy {
+    padding-block: 0;
+  }
+}
 @media (min-width: 1600px) {
   .hero.hero-static {
     height: 850px;
