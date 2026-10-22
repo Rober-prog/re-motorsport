@@ -25,7 +25,7 @@ git push -u origin main
 3. Abre **Actions → Publicar en GitHub Pages → Run workflow → main → Run workflow**. Esto permite iniciar la publicación si el primer push ocurrió antes de activar Pages.
 4. Cuando termine, abre el enlace del despliegue desde el móvil. Para un repositorio llamado `recanvis-martorell`, normalmente será `https://TU_USUARIO.github.io/recanvis-martorell/`.
 
-El workflow obtiene la ruta base de Pages automáticamente. La navegación en español y catalán, los enlaces directos a páginas interiores, las imágenes y el modelo 3D funcionan dentro de esa ruta. Cada nuevo push a `main` vuelve a publicar.
+El workflow obtiene la ruta base de Pages automáticamente. La navegación en español y catalán, los enlaces directos a páginas interiores y las imágenes funcionan dentro de esa ruta. La portada usa una fotografía fija, sin modelos ni controles 3D. Cada nuevo push a `main` vuelve a publicar.
 
 GitHub Pages sirve la web estática. El formulario está desactivado en esta previsualización porque el endpoint de correo requiere Cloudflare Functions y su configuración. El resto de la web se puede revisar desde el móvil.
 

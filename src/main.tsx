@@ -10,6 +10,7 @@ import './styles/global.css';
 import './styles/accessibility.css';
 import './styles/showroom.css';
 import './styles/brand.css';
+import './styles/staticHero.css';
 const locale = localeFromPath(appPath(window.location.pathname));
 const i18n = createI18n(locale);
 function Root() {

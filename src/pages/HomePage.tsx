@@ -1,31 +1,10 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowDownRight, ArrowUpRight, Check, ChevronRight, Wrench } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { activeCategories } from '../data/categories';
 import { CategoryCard } from '../components/catalog/CategoryCard';
-import {
-  ActionLink,
-  ErrorBoundary,
-  SectionHeading,
-  useLocalPath,
-} from '../components/ui/Primitives';
-import { useReducedMotion } from '../hooks/useReducedMotion';
-import { VehicleFallback } from '../components/vehicle/VehicleFallback';
+import { ActionLink, SectionHeading, useLocalPath } from '../components/ui/Primitives';
 import { assetPath } from '../lib/basePath';
-const LazyVehicleExperience = lazy(() => import('../components/vehicle/VehicleExperience'));
-function VehicleExperience() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  return (
-    <ErrorBoundary fallback={<VehicleFallback reason="modelError" />}>
-      {mounted ? <LazyVehicleExperience /> : <VehicleFallback />}
-    </ErrorBoundary>
-  );
-}
-
 export function ContactBanner() {
   const { t } = useTranslation();
   return (
@@ -44,39 +23,23 @@ export function ContactBanner() {
 export default function HomePage() {
   const { t } = useTranslation();
   const path = useLocalPath();
-  const ref = useRef<HTMLDivElement>(null);
-  const reduced = useReducedMotion();
-  useEffect(() => {
-    if (reduced) return;
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      gsap.from('.hero-copy > *', {
-        y: 22,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: 'power2.out',
-      });
-      gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((el) =>
-        gsap.from(el, {
-          y: 24,
-          opacity: 0,
-          duration: 0.65,
-          scrollTrigger: { trigger: el, start: 'top 94%', once: true },
-        }),
-      );
-    }, ref);
-    return () => ctx.revert();
-  }, [reduced]);
   return (
-    <div ref={ref}>
-      <section className="hero" aria-labelledby="hero-title">
-        <div className="garage-background" aria-hidden="true">
-          <div className="garage-line garage-line-1" />
-          <div className="garage-line garage-line-2" />
-          <div className="garage-line garage-line-3" />
-          <div className="garage-grid" />
-        </div>
+    <div>
+      <section className="hero hero-static" aria-labelledby="hero-title">
+        <picture className="hero-photograph">
+          <source
+            media="(max-width: 639px)"
+            srcSet={assetPath('/images/hero-garage-mobile.webp')}
+          />
+          <img
+            src={assetPath('/images/hero-garage.webp')}
+            alt=""
+            width="1672"
+            height="941"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
         <div className="container hero-copy">
           <p className="eyebrow">
             <span className="tiny-line" />
@@ -90,7 +53,7 @@ export default function HomePage() {
           </h1>
           <p className="hero-subtitle">{t('hero.subtitle')}</p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#vehicle-explorer">
+            <a className="button button-primary" href="#categories">
               {t('hero.cta')}
               <ArrowDownRight size={19} />
             </a>
@@ -100,45 +63,12 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-        <div className="hero-brand-emblem">
-          <img
-            src={assetPath('/brand/car-emblem.webp')}
-            width="1282"
-            height="1227"
-            alt="RM — Recanvis Martorell"
-          />
-        </div>
-        <nav className="hero-section-nav" aria-label={t('footer.explore')}>
-          <a className="is-current" href="#hero-title">
-            {t('nav.home')}
-          </a>
-          <a href="#categories">{t('nav.catalog')}</a>
-          <Link to={path('/profesionales')}>{t('nav.professionals')}</Link>
-          <Link to={path('/clasicos')}>{t('nav.classics')}</Link>
-          <Link to={path('/contacto')}>{t('nav.contact')}</Link>
-        </nav>
-        <div className="vehicle-stage" id="vehicle-explorer">
-          <Suspense
-            fallback={
-              <div className="vehicle-loading">
-                <span className="loading-track" />
-                {t('hero.loading')}
-              </div>
-            }
-          >
-            <VehicleExperience />
-          </Suspense>
-        </div>
         <div className="hero-bottom container">
           <a href="#categories">
             {t('hero.scroll')}
             <ArrowDown size={17} />
           </a>
-          <span className="hero-model">TEMERARIO / 3D</span>
         </div>
-        <span className="hero-index" aria-hidden="true">
-          01 — 03
-        </span>
       </section>
       <section className="categories-section section-padding" id="categories">
         <div className="container">

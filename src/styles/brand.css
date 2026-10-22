@@ -26,30 +26,6 @@
   flex-shrink: 0;
   line-height: 0;
 }
-.hero-brand-emblem {
-  position: absolute;
-  top: 18px;
-  right: 24px;
-  width: 120px;
-  aspect-ratio: 1;
-  padding: 9px;
-  border: 1px solid #60bed242;
-  border-radius: 50%;
-  background: radial-gradient(circle, #32373ed9, #32373e99);
-  box-shadow:
-    0 12px 50px #0003,
-    0 0 60px #60bed212;
-  backdrop-filter: blur(5px);
-  z-index: 2;
-  pointer-events: none;
-}
-.hero-brand-emblem img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: 0.94;
-}
 .footer-brand > a {
   display: inline-block;
   max-width: 100%;
@@ -82,23 +58,9 @@
     width: 144px;
     height: 48px;
   }
-  .hero-brand-emblem {
-    width: 108px;
-    right: 20px;
-    top: 16px;
-    padding: 8px;
-  }
   .brand-featured {
     padding: 14px;
     gap: 12px;
-  }
-}
-@media (max-width: 959px) {
-  .hero-brand-emblem {
-    width: 84px;
-    right: 16px;
-    top: 12px;
-    padding: 6px;
   }
 }
 @media (max-width: 639px) {
@@ -117,13 +79,6 @@
   .brand-wordmark {
     width: 120px;
     height: 40px;
-  }
-  .hero-brand-emblem {
-    width: 60px;
-    right: 10px;
-    top: 6px;
-    padding: 5px;
-    box-shadow: 0 0 24px #60bed218;
   }
   .brand-featured {
     padding: 14px;
@@ -147,9 +102,5 @@
   .brand-wordmark {
     width: 102px;
     height: 34px;
-  }
-  .hero-brand-emblem {
-    width: 52px;
-    top: 6px;
   }
 }

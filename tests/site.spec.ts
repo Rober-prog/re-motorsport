@@ -25,17 +25,6 @@ const slugs = [
   'interior',
   'escape',
 ];
-function disableWebglScript() {
-  const original = HTMLCanvasElement.prototype.getContext;
-  HTMLCanvasElement.prototype.getContext = function (
-    this: HTMLCanvasElement,
-    type: string,
-    ...args: unknown[]
-  ) {
-    if (type === 'webgl2' || type === 'webgl') return null;
-    return original.apply(this, [type, ...args] as Parameters<typeof original>);
-  } as typeof original;
-}
 test('las 42 páginas comerciales contienen HTML indexable en ambos idiomas', async ({
   request,
 }) => {
@@ -82,40 +71,6 @@ test('datos de empresa en ES/CA y cautelas en los metadatos', async ({ request }
   }
 });
 
-test('exploración táctil real en móvil y cierre del panel', async ({ browser }) => {
-  const context = await browser.newContext({
-    viewport: { width: 390, height: 844 },
-    deviceScaleFactor: 1,
-    isMobile: true,
-    hasTouch: true,
-    reducedMotion: 'reduce',
-  });
-  const page = await context.newPage();
-  const errors: string[] = [];
-  page.on('pageerror', (e) => errors.push(e.message));
-  page.on('console', (msg) => {
-    if (msg.type() === 'error') errors.push(msg.text());
-  });
-  await page.goto('http://127.0.0.1:4173/');
-  await page.getByRole('button', { name: 'Activar experiencia 3D', exact: true }).tap();
-  const hotspot = page.locator('[data-hotspot="ruedas-neumaticos"]');
-  await expect(hotspot).toBeVisible({ timeout: 45000 });
-  const categories = (await page.locator('#vehicle-category').boundingBox())!;
-  const controls = (await page.locator('.vehicle-controls').boundingBox())!;
-  expect(categories.y + categories.height).toBeLessThanOrEqual(controls.y);
-  await page.screenshot({ path: '.cache/previews/home-mobile.png', fullPage: true });
-  await hotspot.tap();
-  await expect(page.getByRole('dialog', { name: 'Ruedas y neumáticos' })).toBeVisible();
-  const popupBox = (await page.locator('#vehicle-popup').boundingBox())!;
-  const pointBox = (await hotspot.locator('.hotspot-dot').boundingBox())!;
-  expect(popupBox.y).toBeGreaterThan(pointBox.y + pointBox.height);
-  await page.screenshot({ path: '.cache/previews/popup-mobile.png' });
-  await page.getByRole('button', { name: 'Cerrar', exact: true }).last().tap();
-  await expect(page.locator('#vehicle-popup')).toHaveCount(0);
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  expect(errors).toEqual([]);
-  await context.close();
-});
 test('el catálogo funciona sin JavaScript', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
@@ -158,141 +113,8 @@ test('validación y bloqueo honesto del envío', async ({ page }) => {
   await expect(page.getByRole('alert')).toContainText('No se ha enviado tu consulta');
   expect(calls).toBe(0);
 });
-test('WebGL ausente conserva el catálogo y el fallback', async ({ page }) => {
-  await page.addInitScript(disableWebglScript);
-  await page.goto('/');
-  await expect(page.getByText(/La vista 3D no está disponible/)).toBeVisible();
-  await expect(page.locator('canvas')).toHaveCount(0);
-  await expect(page.locator('.vehicle-poster')).toBeVisible();
-  await expect(page.locator('.category-card')).toHaveCount(6);
-});
-test('un error de carga del modelo deja disponible la navegación', async ({ page }) => {
-  await page.route('**/models/*.glb', (route) => route.abort());
-  await page.goto('/');
-  await expect(page.getByText(/No se ha podido cargar el vehículo/)).toBeVisible({
-    timeout: 45000,
-  });
-  await page.locator('.desktop-nav').getByRole('link', { name: 'Catálogo', exact: true }).click();
-  await expect(page.locator('.category-card')).toHaveCount(11);
-});
-test('tarjetas próximas al punto, sin cubrirlo y dentro de la portada', async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/');
-  const positions: number[] = [];
-  for (const id of ['motor', 'ruedas-neumaticos']) {
-    const hotspot = page.locator(`[data-hotspot="${id}"]`);
-    await expect(hotspot).toBeVisible({ timeout: 45000 });
-    await hotspot.click();
-    const popup = page.locator('#vehicle-popup');
-    await expect(popup).toHaveAttribute('data-placement', 'anchored');
-    await expect
-      .poll(async () => {
-        const dot = await hotspot.locator('.hotspot-dot').boundingBox();
-        const box = await popup.boundingBox();
-        if (!dot || !box) return Infinity;
-        const x = dot.x + dot.width / 2,
-          y = dot.y + dot.height / 2;
-        return Math.hypot(
-          Math.max(box.x - x, 0, x - box.x - box.width),
-          Math.max(box.y - y, 0, y - box.y - box.height),
-        );
-      })
-      .toBeLessThan(180);
-    const box = (await popup.boundingBox())!;
-    const dot = (await hotspot.locator('.hotspot-dot').boundingBox())!;
-    expect(box.y >= dot.y + dot.height || box.y + box.height <= dot.y).toBe(true);
-    expect(box.x).toBeGreaterThanOrEqual(0);
-    expect(box.x + box.width).toBeLessThanOrEqual(1440);
-    expect(box.y).toBeGreaterThanOrEqual(94);
-    expect(box.y + box.height).toBeLessThanOrEqual(1000);
-    positions.push(box.y);
-    await page.keyboard.press('Escape');
-  }
-  expect(Math.abs(positions[0] - positions[1])).toBeGreaterThan(250);
-});
-
-test('giro completo con botones, arrastre y restablecimiento', async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/');
-  const point = page.locator('[data-hotspot="motor"] .hotspot-dot');
-  await expect(point).toBeVisible({ timeout: 45000 });
-  const initial = (await point.boundingBox())!;
-  const right = page.getByRole('button', { name: 'Girar a la derecha', exact: true });
-  for (let step = 0; step < 6; step++) await right.click();
-  await expect
-    .poll(async () => Math.abs((await point.boundingBox())!.x - initial.x))
-    .toBeGreaterThan(250);
-  for (let step = 0; step < 6; step++) await right.click();
-  await expect
-    .poll(async () => Math.abs((await point.boundingBox())!.x - initial.x))
-    .toBeLessThan(6);
-  const canvas = (await page.locator('.vehicle-canvas').boundingBox())!;
-  await page.mouse.move(400, canvas.y + canvas.height - 25);
-  await page.mouse.down();
-  await page.mouse.move(1000, canvas.y + canvas.height - 25, { steps: 15 });
-  await page.mouse.up();
-  await expect
-    .poll(async () => Math.abs((await point.boundingBox())!.x - initial.x))
-    .toBeGreaterThan(200);
-  await page.getByRole('button', { name: 'Restablecer vista', exact: true }).click();
-  await expect
-    .poll(async () => Math.abs((await point.boundingBox())!.x - initial.x))
-    .toBeLessThan(6);
-  const left = page.getByRole('button', { name: 'Girar a la izquierda', exact: true });
-  for (let step = 0; step < 6; step++) await left.click();
-  await expect
-    .poll(async () => Math.abs((await point.boundingBox())!.x - initial.x))
-    .toBeGreaterThan(250);
-});
-
-test('hotspots con teclado, Escape, CTA, calidad y controles', async ({ page }) => {
-  const errors: string[] = [];
-  page.on('pageerror', (error) => errors.push(error.message));
-  page.on('console', (msg) => {
-    if (msg.type() === 'error') errors.push(msg.text());
-  });
-  await page.goto('/');
-  const hotspot = page.locator('[data-hotspot="ruedas-neumaticos"]');
-  await expect(hotspot).toBeVisible({ timeout: 45000 });
-  await expect(hotspot).toHaveAttribute('data-anchor-mode', 'mesh');
-  await expect(page.locator('.vehicle-note')).toHaveCount(0);
-  await expect(page.getByText('Arrastra para explorar', { exact: true })).toHaveCount(0);
-  const label = hotspot.locator('.hotspot-label');
-  await expect(label).toBeHidden();
-  await hotspot.hover();
-  await expect(label).toBeVisible();
-  await expect(page.locator('#vehicle-popup')).toHaveCount(0);
-  await page.mouse.move(10, 10);
-  await expect(label).toBeHidden();
-  await page.keyboard.press('Tab');
-  await hotspot.focus();
-  await expect(label).toBeVisible();
-  await page.keyboard.press('Enter');
-  await expect(page.getByRole('dialog', { name: 'Ruedas y neumáticos' })).toBeVisible();
-  await expect(
-    page.getByRole('link', { name: 'Consultar esta categoría', exact: true }),
-  ).toHaveAttribute('href', '/contacto?categoria=ruedas-neumaticos');
-  await page.keyboard.press('Escape');
-  await expect(page.locator('#vehicle-popup')).toHaveCount(0);
-  await expect(hotspot).toBeFocused();
-  for (let attempt = 0; attempt < 2; attempt++) {
-    await page.locator('#vehicle-category').selectOption('motor');
-    await expect(page.getByRole('dialog', { name: 'Motor', exact: true })).toBeVisible();
-    await page.keyboard.press('Escape');
-  }
-  await page.getByRole('button', { name: 'Girar a la derecha', exact: true }).click();
-  await page.getByRole('button', { name: 'Restablecer vista', exact: true }).click();
-  await page.getByLabel('Calidad gráfica').selectOption('low');
-  await hotspot.click();
-  await page.getByRole('link', { name: 'Consultar esta categoría', exact: true }).click();
-  await expect(page.getByLabel('Categoría de producto')).toHaveValue('ruedas-neumaticos');
-  expect(errors).toEqual([]);
-});
 for (const width of [360, 390, 768, 1024, 1440, 1920])
   test(`responsive ${width}px sin desbordamiento`, async ({ page }) => {
-    await page.addInitScript(disableWebglScript);
     await page.setViewportSize({ width, height: 900 });
     for (const path of ['/', '/catalogo', '/contacto', '/ca/clasicos']) {
       await page.goto(path);
@@ -311,7 +133,6 @@ for (const width of [360, 390, 768, 1024, 1440, 1920])
   });
 test('contraste y semántica con axe en páginas representativas', async ({ page }) => {
   test.setTimeout(180000);
-  await page.addInitScript(disableWebglScript);
   const auditPaths = [...routes, '/catalogo/frenos'].flatMap((path) => [
     path,
     path === '/' ? '/ca' : `/ca${path}`,

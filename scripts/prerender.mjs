@@ -75,9 +75,11 @@ await fs.writeFile(
   'dist/_headers',
   headers.replace("script-src 'self'", `script-src 'self' 'sha256-${schemaHash}'`),
 );
-// Exclude the unoptimized original and the visual reference from the deployable output.
-await fs.rm('dist/models/Lamborghini+Temerario.glb', { force: true });
+// The static hero does not ship the retired 3D models or visual reference.
 const distRoot = path.resolve('dist');
+const modelsOutput = path.resolve(distRoot, 'models');
+if (!modelsOutput.startsWith(distRoot + path.sep)) throw new Error('Models output outside dist');
+await fs.rm(modelsOutput, { recursive: true, force: true });
 const referenceOutput = path.resolve(distRoot, 'references');
 if (!referenceOutput.startsWith(distRoot + path.sep))
   throw new Error('Reference output outside dist');

@@ -46,30 +46,3 @@
     font-size: 12px;
   }
 }
-.vehicle-category-access {
-  display: block;
-  bottom: 90px;
-}
-.vehicle-category-access select {
-  min-height: 38px;
-  max-width: 205px;
-  border-radius: 5px;
-  padding: 8px 12px;
-}
-@media (max-width: 1199px) {
-  .vehicle-category-access {
-    left: 36px;
-  }
-}
-@media (max-width: 639px) {
-  .vehicle-category-access {
-    left: 32px;
-    bottom: 6px;
-  }
-  .vehicle-category-access select {
-    min-height: 33px;
-    font-size: 8px;
-    max-width: 150px;
-    padding: 5px 8px;
-  }
-}

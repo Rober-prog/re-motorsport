@@ -1,8 +1,8 @@
 # Recanvis Martorell
 
-Web corporativa bilingüe ES/CA con catálogo informativo, explorador 3D y consultas comerciales. Desarrollo local; **no se ha publicado ni se ha modificado ningún DNS**.
+Web corporativa bilingüe ES/CA con catálogo informativo, portada fotográfica y consultas comerciales. Repositorio público con despliegue automático en GitHub Pages.
 
-La portada incorpora ahora un fondo de garaje generado, un encuadre más centrado y tarjetas próximas a sus puntos. [Cambios, capturas y procedencia del fondo](docs/visual-refresh.md).
+La portada actual utiliza una imagen fija optimizada para escritorio y móvil. Se han eliminado la animación del coche, los puntos interactivos y las tarjetas flotantes. [Imagen, prompt y detalles de la portada](docs/static-hero.md).
 
 Se han integrado los dos logotipos aportados, dando protagonismo al emblema del coche en la portada, la cabecera, el pie y el favicon. [Archivos y uso de la marca](docs/brand.md).
 
@@ -38,17 +38,15 @@ La previsualización estática se abre en http://127.0.0.1:4173 y sirve el HTML 
 - Español y catalán con URLs estables: `/...` y `/ca/...`, cambio de idioma que conserva ruta y consulta.
 - 42 páginas HTML prerenderizadas, además de 404. Contenido comercial accesible sin JavaScript.
 - Titles, descripciones, canonical, hreflang, Open Graph, Twitter Cards, sitemap, robots y datos estructurados mínimos sin dirección inventada.
-- Hero con el Lamborghini suministrado, cámara calculada desde Box3, entorno de iluminación local, materiales PBR y entrada GSAP.
-- Rotación completa de 360° con arrastre de ratón y botones de giro en ambos sentidos, accesibles por teclado y tacto; restablecimiento, calidad seleccionable y render bajo demanda.
-- Manifiesto de 11 hotspots; se muestran seis puntos exteriores/esquemáticos para reducir solapamientos y cinco en móvil. Selector textual de las 11 categorías, catálogo y popups con CTA.
-- Etiquetas visibles al pasar sobre el punto o enfocarlo con teclado. Ficha mediante clic, Enter o toque; Escape y devolución del foco. Tarjeta adaptada a móvil.
-- Detección WebGL, carga diferida, progreso, boundary de errores e imagen estática del mismo modelo.
-- En móvil o ahorro de datos, el 3D se activa de forma explícita desde su botón. En escritorio se carga al entrar en la zona visible.
+- Portada fotográfica con deportivo grafito en un taller, imágenes WebP adaptadas a móvil y escritorio y acceso directo al catálogo.
+- Sin WebGL, animación del coche, puntos interactivos ni descargas de modelos. Título, imagen y enlaces disponibles sin JavaScript.
 - Formularios general, recambio, profesional y clásico con React Hook Form y Zod; validación compartida con servidor.
 - Función de correo Resend configurable, honeypot, control de origen, cuerpo limitado y contador atómico D1.
 - Skip link, menús y diálogos nativos, foco visible, avisos anunciables, reducción de movimiento y fuentes locales OFL.
 
-## Modelo y licencia
+## Archivo del modelo anterior
+
+La web actual no utiliza estos modelos. Se conservan como material de origen y se excluyen del sitio compilado. Los informes del explorador que figuran más abajo documentan la implementación anterior.
 
 Original conservado: `public/models/Lamborghini+Temerario.glb` (41.118.748 bytes).
 
@@ -62,17 +60,15 @@ Informes: [inspección](docs/model-inspection.md), [rendimiento](docs/3d-perform
 
 ## Editar contenido
 
-| Archivo                       | Responsabilidad                                                         |
-| ----------------------------- | ----------------------------------------------------------------------- |
-| `src/data/categories.ts`      | Nombres, descripciones, familias, filtros, orden y estado de categorías |
-| `src/data/vehicleHotspots.ts` | Anclajes, nodos observados, offsets, visibilidad y destinos             |
-| `src/locales/resources.ts`    | Traducciones de navegación, páginas, formularios y mensajes             |
-| `src/components/vehicle/`     | Escena, vehículo, cámara, luces, selección, controles y fallback        |
-| `src/pages/`                  | Páginas corporativas y catálogo                                         |
-| `src/styles/`                 | Tokens, diseño responsive y contraste                                   |
-| `src/lib/contactSchema.ts`    | Validación compartida                                                   |
-| `functions/api/contact.ts`    | Envío y protección del endpoint                                         |
-| `scripts/prerender.mjs`       | Generación HTML, sitemap y CSP de JSON-LD                               |
+| Archivo                    | Responsabilidad                                                         |
+| -------------------------- | ----------------------------------------------------------------------- |
+| `src/data/categories.ts`   | Nombres, descripciones, familias, filtros, orden y estado de categorías |
+| `src/locales/resources.ts` | Traducciones de navegación, páginas, formularios y mensajes             |
+| `src/pages/`               | Páginas corporativas y catálogo                                         |
+| `src/styles/`              | Tokens, diseño responsive y contraste                                   |
+| `src/lib/contactSchema.ts` | Validación compartida                                                   |
+| `functions/api/contact.ts` | Envío y protección del endpoint                                         |
+| `scripts/prerender.mjs`    | Generación HTML, sitemap y CSP de JSON-LD                               |
 
 No hay CMS, carrito, pagos, productos con stock ficticio ni integraciones comerciales innecesarias. Añadir una categoría a `categories.ts` la incorpora al catálogo y al prerenderizado; calibrar su anclaje si se desea mostrarla sobre el vehículo.
 
