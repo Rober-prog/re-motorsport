@@ -16,7 +16,7 @@ const slugs = [
   'mecanica',
   'frenos',
   'motor',
-  'iluminacion',
+  'neumaticos',
   'carroceria',
   'retrovisores-accesorios',
   'suspension',
