@@ -75,7 +75,7 @@ export const categories: Category[] = [
     ['Filtres', 'Lubricació', 'Distribució'],
     'engine',
     'mechanics',
-    3,
+    7,
   ),
   entry(
     'iluminacion',
@@ -123,7 +123,8 @@ export const categories: Category[] = [
     ['Amortidors', 'Molles', 'Braços'],
     'spring',
     'mechanics',
-    7,
+    3,
+    '/images/categories/suspension.webp',
   ),
   entry(
     'sistema-electrico',
