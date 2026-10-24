@@ -7,6 +7,7 @@ import { ArrowUpRight, CircleAlert, CheckCircle2 } from 'lucide-react';
 import { contactSchema, type ContactInput, type ContactData } from '../../lib/contactSchema';
 import { activeCategories } from '../../data/categories';
 import { localeFromPath } from '../../lib/routing';
+import { visibleStores, brand } from '../../config/brand';
 import { Spinner, useLocalPath } from '../ui/Primitives';
 export function ContactForm({ initialType = 'general' }: { initialType?: ContactData['type'] }) {
   const { t } = useTranslation();
@@ -18,7 +19,12 @@ export function ContactForm({ initialType = 'general' }: { initialType?: Contact
   const category = activeCategories().some((c) => c.id === requestedCategory)
     ? requestedCategory
     : '';
-  const enabled = import.meta.env.VITE_CONTACT_ENABLED === 'true';
+  const enabled =
+    brand.contact.submissionEnabled &&
+    brand.legal.privacyApproved &&
+    import.meta.env.VITE_CONTACT_ENABLED === 'true';
+  const [storeId, setStoreId] = useState(visibleStores[0].id);
+  const store = visibleStores.find((s) => s.id === storeId)!;
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [feedback, setFeedback] = useState('');
   const {
@@ -87,7 +93,7 @@ export function ContactForm({ initialType = 'general' }: { initialType?: Contact
   const onSubmit = async (data: ContactData) => {
     if (!enabled) {
       setStatus('error');
-      setFeedback(t('form.unavailable'));
+      setFeedback(t('form.preparedLocal'));
       return;
     }
     setStatus('sending');
@@ -137,6 +143,16 @@ export function ContactForm({ initialType = 'general' }: { initialType?: Contact
         </div>
       )}
       <div className="form-grid">
+        <div className="form-field full-width">
+          <label htmlFor={`${id}-store`}>{t('form.store')}</label>
+          <select id={`${id}-store`} value={storeId} onChange={(e) => setStoreId(e.target.value)}>
+            {visibleStores.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.name}
+              </option>
+            ))}
+          </select>
+        </div>
         {input('name', t('form.name'), { required: true })}
         {input('email', t('form.email'), { type: 'email', required: true })}
         {input('phone', t('form.phone'), { type: 'tel' })}
@@ -192,7 +208,7 @@ export function ContactForm({ initialType = 'general' }: { initialType?: Contact
         </div>
       </div>
       <div className="honeypot" aria-hidden="true">
-        <label htmlFor={`${id}-website`}>Website</label>
+        <label htmlFor={`${id}-website`}>{t('form.website')}</label>
         <input id={`${id}-website`} {...register('website')} tabIndex={-1} autoComplete="off" />
       </div>
       <div className="consent">
@@ -218,11 +234,16 @@ export function ContactForm({ initialType = 'general' }: { initialType?: Contact
           <Spinner label={t('form.sending')} />
         ) : (
           <>
-            {t('form.send')}
+            {enabled ? t('form.send') : t('form.review')}
             <ArrowUpRight size={18} />
           </>
         )}
       </button>
+      {!enabled && (
+        <a className="button button-secondary store-call" href={`tel:${store.phone}`}>
+          {t('form.callStore', { name: store.name, phone: store.phoneLabel })}
+        </a>
+      )}
       <div
         className={`form-feedback ${status}`}
         role={status === 'error' ? 'alert' : 'status'}

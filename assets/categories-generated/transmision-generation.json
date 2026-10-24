@@ -1,0 +1,12 @@
+{
+  "category": "08 · Transmisión y embrague",
+  "method": "Built-in image_gen, filters photograph as style reference",
+  "master": "assets/categories-generated/transmision-master.png",
+  "output": "public/images/categories/transmision-rojo.webp",
+  "width": 960,
+  "height": 640,
+  "bytes": 159924,
+  "primary": "#F80303",
+  "prompt": "docs/category-08-prompt.txt",
+  "illustrative": true
+}

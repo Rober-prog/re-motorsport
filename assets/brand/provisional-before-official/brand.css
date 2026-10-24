@@ -1,0 +1,10 @@
+/* Generated from src/config/brand.json. PROVISIONAL palette. */
+:root {
+  --brand-primary: #f5b942;
+  --brand-secondary: #232830;
+  --brand-accent: #ffe0a0;
+  --brand-ink: #14171b;
+  --brand-surface: #1d2229;
+  --brand-muted: #bfc5ce;
+  --brand-border: #424a56;
+}

@@ -18,7 +18,7 @@ describe('Formularios accesibles', () => {
   it('preselecciona la categoría recibida y anuncia errores', async () => {
     render(wrap(<ContactForm />, '/es/contacto?categoria=frenos'));
     expect(screen.getByLabelText('Categoría de producto')).toHaveValue('frenos');
-    await userEvent.click(screen.getByRole('button', { name: 'Enviar consulta' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Revisar consulta' }));
     expect(await screen.findByText('Introduce un correo electrónico válido.')).toBeInTheDocument();
     expect(screen.getByRole('alert')).toHaveTextContent('Revisa los campos indicados');
   });
@@ -32,7 +32,7 @@ describe('Formularios accesibles', () => {
       'Necesito información sobre los frenos de mi vehículo.',
     );
     await userEvent.click(screen.getByRole('checkbox'));
-    await userEvent.click(screen.getByRole('button', { name: 'Enviar consulta' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Revisar consulta' }));
     expect(await screen.findByText(/No se ha enviado tu consulta/)).toBeInTheDocument();
     expect(fetchSpy).not.toHaveBeenCalled();
   });
@@ -44,6 +44,6 @@ describe('Catálogo', () => {
     await userEvent.type(search, 'zzzz');
     expect(screen.getByText('No encontramos esa categoría.')).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: 'Limpiar filtros' }));
-    expect(screen.getByRole('status')).toHaveTextContent('11 categorías');
+    expect(screen.getByRole('status')).toHaveTextContent('8 categorías');
   });
 });

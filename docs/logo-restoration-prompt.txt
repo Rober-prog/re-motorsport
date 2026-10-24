@@ -1,0 +1,12 @@
+Use case: precise-object-edit / logo-brand restoration.
+Edit target: the supplied low-resolution JPEG of the genuine RE Motorsport business logo.
+Primary request: reconstruct this exact existing logo as an extremely clean high-resolution flat raster logo, preserving its original design faithfully. Produce a wide tightly framed logo with genuine transparent background and a small consistent safe margin, at the highest available resolution.
+Invariants: left-hand red circular emblem with the exact white tilted piston and connecting-rod cutout silhouette and small red pin detail; the exact custom black slanted 'RE' letterforms above; the exact red italic custom 'Motorsport' script beneath 'RE', extending to the right. Keep the emblem proportions, letter shapes, kerning, angles, alignment, baseline and relative scale as close to the input as possible. The wording is exactly 'RE' and 'Motorsport' with the same capitalization. Preserve all emblem details.
+Palette: red representative sampled from the original JPEG RGB(248,3,3), HEX #F80303; black #000000; the white shapes inside the red emblem remain opaque white. Outside the logo must be alpha transparent, including the large empty white area in the reference, which should be removed. Do not add new shapes, slogans, hyphens, lines, borders, outlines, gradients, shadows, texture or simulated vector mockups. No redesign. Refine jagged JPEG edges into crisp smooth contours without inventing new shapes. Do not insert a checkerboard background.
+Asset type: genuine business logo restoration for website header, footer and high-resolution downloadable PNG. One logo only.
+
+Tool: built-in image_gen, edit, transparent_background=true.
+Source: assets/brand/re-motorsport/logo-original.jpeg.
+Native output: assets/brand/re-motorsport/logo-ai-master.png (2132 x 737).
+Trimmed master: assets/brand/re-motorsport/logo-restored-master.png (2089 x 587).
+The 4096 px exports are resized derivatives of the reconstructed raster, not exact vectorization.

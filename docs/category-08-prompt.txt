@@ -1,0 +1,8 @@
+Use case: product-mockup.
+Asset type: RE Motorsport website category 08 "Transmisión y embrague", landscape 3:2 photograph 1536x1024.
+Input image: filters category photograph is a style reference only. Match its workshop, metal bench, natural lighting, photographic quality and corporate red accents, but create a new subject.
+Subject: professionally arranged automotive clutch and transmission components on a brushed steel workbench: a realistic silver clutch pressure plate standing tilted backwards, a dark friction clutch disc with central splined hub and visible springs in front, a compact release bearing, and a single CV half shaft with black rubber boots laid horizontally behind. Correct plausible mechanical geometry, all principal parts fully visible with breathing room for responsive cropping.
+Scene: same modern workshop with softly blurred red lift pillars, red tool drawers on left, daylight windows on left and a car with open bonnet in background right. Thin bright red workbench rim.
+Style: realistic premium commercial product photography, crisp physical materials, fine machining details, soft natural side light, realistic shadows, shallow depth of field.
+Palette: steel silver, dark metal, black rubber and corporate red #F80303 accents on workshop equipment.
+Constraints: no text, brands, logos, watermarks, people, prices, neon glow, floating components or excessive clutter. Generic illustrative parts and workshop.

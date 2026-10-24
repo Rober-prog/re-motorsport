@@ -1,106 +1,13 @@
-/* Corporate palette for the supplied artwork; monochrome emblem on the hero. */
-.brand {
-  display: inline-flex;
-  gap: 12px;
-  padding: 6px 12px 6px 7px;
-  border-radius: 7px;
-  background: #f7f9fb;
-  align-items: center;
-  max-width: 100%;
-}
-.brand-emblem {
-  filter: url('#corporate-logo-colors');
-  width: 58px;
-  height: 58px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-.brand-wordmark {
-  filter: url('#corporate-wordmark-turquoise');
-  width: 174px;
-  height: 58px;
-  object-fit: contain;
-  min-width: 0;
-}
-.brand-link {
-  flex-shrink: 0;
-  line-height: 0;
-}
-.footer-brand > a {
-  display: inline-block;
-  max-width: 100%;
-}
-.brand-featured {
-  width: 350px;
-  padding: 14px;
-  gap: 16px;
-  border-radius: 10px;
-}
-.brand-featured .brand-emblem {
-  width: 96px;
-  height: 96px;
-}
-.brand-featured .brand-wordmark {
-  width: 210px;
-  height: 70px;
-  flex: 1;
-}
-@media (max-width: 1199px) {
-  .brand {
-    gap: 9px;
-    padding: 6px 9px 6px 6px;
-  }
-  .brand-emblem {
-    width: 48px;
-    height: 48px;
-  }
-  .brand-wordmark {
-    width: 144px;
-    height: 48px;
-  }
-  .brand-featured {
-    padding: 14px;
-    gap: 12px;
-  }
-}
-@media (max-width: 639px) {
-  .header-inner {
-    gap: 12px;
-  }
-  .brand {
-    gap: 7px;
-    padding: 5px 8px 5px 5px;
-    border-radius: 5px;
-  }
-  .brand-emblem {
-    width: 40px;
-    height: 40px;
-  }
-  .brand-wordmark {
-    width: 120px;
-    height: 40px;
-  }
-  .brand-featured {
-    padding: 14px;
-    gap: 16px;
-    border-radius: 10px;
-  }
-  .brand-featured .brand-emblem {
-    width: 94px;
-    height: 94px;
-  }
-  .brand-featured .brand-wordmark {
-    width: 200px;
-    height: 67px;
-  }
-}
-@media (max-width: 379px) {
-  .brand-emblem {
-    width: 34px;
-    height: 34px;
-  }
-  .brand-wordmark {
-    width: 102px;
-    height: 34px;
-  }
+/* Generated from brand.json: sampled JPEG colors + documented accessible UI variants. */
+:root {
+  --brand-primary: #f80303;
+  --brand-secondary: #212121;
+  --brand-accent: #ff5252;
+  --brand-ink: #000000;
+  --brand-surface: #151515;
+  --brand-muted: #c3c3c3;
+  --brand-border: #3d3d3d;
+  --brand-white: #ffffff;
+  --brand-action: #d50000;
+  --brand-actionHover: #e00000;
 }

@@ -1,21 +1,22 @@
-import { ArrowUpRight, Check, ChevronRight, Wrench } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { ArrowUpRight, ArrowDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { activeCategories } from '../data/categories';
+import { brand } from '../config/brand';
 import { CategoryCard } from '../components/catalog/CategoryCard';
 import { ActionLink, SectionHeading, useLocalPath } from '../components/ui/Primitives';
 import { assetPath } from '../lib/basePath';
+import { Stores } from '../components/Stores';
 export function ContactBanner() {
   const { t } = useTranslation();
   return (
     <section className="contact-banner">
       <div className="container">
         <div>
-          <p className="eyebrow">RECANVIS MARTORELL</p>
-          <h2>{t('common.question')}</h2>
-          <p>{t('common.questionText')}</p>
+          <p className="eyebrow">{brand.name}</p>
+          <h2>{t('landing.bannerTitle')}</h2>
+          <p>{t('landing.bannerText')}</p>
         </div>
-        <ActionLink to="/contacto">{t('common.contact')}</ActionLink>
       </div>
     </section>
   );
@@ -24,155 +25,101 @@ export default function HomePage() {
   const { t } = useTranslation();
   const path = useLocalPath();
   return (
-    <div>
-      <section className="hero hero-static" aria-labelledby="hero-title">
+    <>
+      <section className="hero re-hero hero-static" aria-labelledby="hero-title">
         <picture className="hero-photograph">
           <source
-            media="(max-width: 639px)"
-            srcSet={assetPath('/images/hero-garage-turquoise-mobile.webp')}
+            media="(max-width: 959px)"
+            srcSet={assetPath(brand.hero.mobile)}
+            width="900"
+            height="1350"
           />
           <img
-            src={assetPath('/images/hero-garage-turquoise.webp')}
-            alt=""
+            src={assetPath(brand.hero.desktop)}
+            alt={t('landing.imageAlt')}
             width="1672"
             height="941"
             fetchPriority="high"
             decoding="async"
           />
         </picture>
-        <img
-          className="hero-corner-logo"
-          src={assetPath('/brand/car-emblem.webp')}
-          alt=""
-          aria-hidden="true"
-          width="768"
-          height="735"
-        />
         <div className="container hero-copy">
           <p className="eyebrow">
             <span className="tiny-line" />
-            {t('hero.eyebrow')}
+            {t('landing.eyebrow')}
           </p>
           <h1 id="hero-title">
-            {t('hero.line1')}
+            {t('landing.line1')}
             <br />
-            <span>{t('hero.line2')}</span>
-            <br className="mobile-break" /> {t('hero.line3')}
+            <span>{t('landing.line2')}</span>
           </h1>
           <p className="hero-subtitle">{t('hero.subtitle')}</p>
+          <div className="hero-actions">
+            <Link className="text-link" to={path('/tiendas')}>
+              {t('landing.storesLink')} <ArrowUpRight size={18} />
+            </Link>
+          </div>
+          <p className="hero-locations">
+            ESPARREGUERA <span>/</span> PIERA
+          </p>
+        </div>
+        <div className="hero-bottom container">
+          <a href="#categories">
+            {t('landing.explore')} <ArrowDown size={16} />
+          </a>
+          <span>{t('landing.eyebrow')}</span>
         </div>
       </section>
       <section className="categories-section section-padding" id="categories">
         <div className="container">
-          <div data-reveal>
-            <SectionHeading
-              eyebrow={t('home.catalogEyebrow')}
-              title={t('home.catalogTitle')}
-              text={t('home.catalogText')}
-            >
-              <ActionLink to="/catalogo" secondary>
-                {t('common.viewCatalog')}
-              </ActionLink>
-            </SectionHeading>
-          </div>
-          <div className="home-category-grid" data-reveal>
+          <SectionHeading
+            eyebrow={t('landing.catalogEyebrow')}
+            title={t('landing.catalogTitle')}
+            text={t('landing.catalogText')}
+          >
+            <ActionLink to="/catalogo" secondary>
+              {t('landing.allParts')}
+            </ActionLink>
+          </SectionHeading>
+          <div className="home-category-grid">
             {activeCategories()
               .slice(0, 6)
               .map((c, i) => (
                 <CategoryCard key={c.id} category={c} index={i} />
               ))}
           </div>
-          <div className="catalog-footnote">
-            <p>{t('common.provisional')}</p>
-            <Link to={path('/catalogo')}>
-              {t('common.all')}
-              <ChevronRight size={16} />
-            </Link>
+          <p className="catalog-footnote">{t('landing.footnote')}</p>
+        </div>
+      </section>
+      <section className="section-padding process-section" id="como-trabajamos">
+        <div className="container">
+          <SectionHeading
+            eyebrow={t('landing.processEyebrow')}
+            title={t('landing.processTitle')}
+            text={t('landing.processText')}
+          />
+          <div className="process-grid">
+            {[1, 2, 3].map((i) => (
+              <article key={i}>
+                <span className="process-number">0{i}</span>
+                <h3>{t(`landing.step${i}Title`)}</h3>
+                <p>{t(`landing.step${i}Text`)}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
-      <section className="company-section section-padding">
-        <div className="container company-grid">
-          <div className="company-art" data-reveal aria-hidden="true">
-            <div className="technical-disc">
-              <div />
-              <div />
-              <div />
-              <span>RM</span>
-            </div>
-            <div className="art-caption">
-              <span>
-                RECANVIS
-                <br />
-                MARTORELL
-              </span>
-              <ArrowUpRight size={26} />
-            </div>
-            <span className="art-coordinate">RM / AUTOMOTIVE</span>
-          </div>
-          <div className="company-copy" data-reveal>
-            <p className="eyebrow">{t('home.companyEyebrow')}</p>
-            <h2>{t('home.companyTitle')}</h2>
-            <p>{t('home.companyText')}</p>
-            <ActionLink to="/empresa" secondary>
-              {t('home.companyLink')}
-            </ActionLink>
-          </div>
+      <section className="section-padding" id="tiendas">
+        <div className="container">
+          <SectionHeading
+            eyebrow={t('landing.storesEyebrow')}
+            title={t('landing.storesTitle')}
+            text={t('landing.storesText')}
+          />
+          <Stores />
         </div>
-        <div className="container value-grid" data-reveal>
-          {[1, 2, 3].map((i) => (
-            <div className="value-item" key={i}>
-              <span className="value-check">
-                <Check size={18} />
-              </span>
-              <h3>{t(`home.value${i}`)}</h3>
-              <p>{t(`home.value${i}Text`)}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-      <section className="professionals-section section-padding">
-        <div className="container professional-panel" data-reveal>
-          <div>
-            <p className="eyebrow">{t('home.proEyebrow')}</p>
-            <h2>{t('home.proTitle')}</h2>
-            <p>{t('home.proText')}</p>
-            <ActionLink to="/profesionales">{t('home.proCta')}</ActionLink>
-          </div>
-          <div className="professional-art" aria-hidden="true">
-            <Wrench size={200} strokeWidth={0.6} />
-            <span>
-              PRO<span>FESSIONAL</span>
-            </span>
-            <i />
-          </div>
-        </div>
-      </section>
-      <section className="container editorial-grid section-padding">
-        <div className="editorial-card" data-reveal>
-          <p className="eyebrow">04 / {t('nav.offers')}</p>
-          <h2>{t('home.offers')}</h2>
-          <p>{t('home.offersText')}</p>
-          <Link className="text-link" to={path('/promociones')}>
-            {t('common.more')}
-            <ArrowUpRight size={17} />
-          </Link>
-        </div>
-        <div className="editorial-card classics-card" data-reveal>
-          <p className="eyebrow">05 / {t('nav.classics')}</p>
-          <h2>{t('home.classics')}</h2>
-          <p>{t('home.classicsText')}</p>
-          <Link className="text-link" to={path('/clasicos')}>
-            {t('home.exploreClassics')}
-            <ArrowUpRight size={17} />
-          </Link>
-        </div>
-      </section>
-      <section className="brand-status container">
-        <p className="eyebrow">{t('home.brands')}</p>
-        <p>{t('home.brandsText')}</p>
       </section>
       <ContactBanner />
-    </div>
+    </>
   );
 }

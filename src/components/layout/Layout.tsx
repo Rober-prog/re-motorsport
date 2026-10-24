@@ -2,44 +2,38 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowUp, ArrowUpRight, Menu, X } from 'lucide-react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { localeFromPath, localPath, withoutLocale } from '../../lib/routing';
-import { business } from '../../lib/business';
+
+import { brand } from '../../config/brand';
 import { assetPath } from '../../lib/basePath';
+import { localeFromPath, localPath, withoutLocale } from '../../lib/routing';
+
 import { ActionLink, Tooltip, useLocalPath } from '../ui/Primitives';
 
 const navigation = [
   ['/', 'home'],
-  ['/empresa', 'company'],
   ['/catalogo', 'catalog'],
-  ['/profesionales', 'professionals'],
-  ['/promociones', 'offers'],
-  ['/clasicos', 'classics'],
+  ['/empresa', 'company'],
+  ['/tiendas', 'stores'],
+  ['/contacto', 'contact'],
 ] as const;
 export function Brand({ featured = false }: { featured?: boolean }) {
   return (
     <span className={`brand${featured ? ' brand-featured' : ''}`}>
       <img
-        className="brand-emblem"
-        src={assetPath('/brand/car-emblem.webp')}
-        width="1282"
-        height="1227"
-        alt=""
-        aria-hidden="true"
-      />
-      <img
-        className="brand-wordmark"
-        src={assetPath('/brand/wordmark.webp')}
-        width="2172"
-        height="724"
-        alt="Recanvis Martorell"
+        className="brand-logo"
+        src={assetPath(brand.logo.src)}
+        width={brand.logo.width}
+        height={brand.logo.height}
+        alt={brand.name}
+        decoding="async"
       />
     </span>
   );
 }
 function Header() {
   const { t } = useTranslation();
-  const { pathname, search } = useLocation();
   const path = useLocalPath();
+  const { pathname, search, hash } = useLocation();
   const locale = localeFromPath(pathname);
   const [open, setOpen] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -71,16 +65,16 @@ function Header() {
           </nav>
           <div className="header-actions">
             <nav className="language-switch" aria-label={t('common.language')}>
-              {(['es', 'ca'] as const).map((l) => (
+              {(['es', 'ca'] as const).map((language) => (
                 <Link
-                  key={l}
-                  to={localPath(withoutLocale(pathname), l) + search}
-                  lang={l}
-                  hrefLang={l}
-                  aria-label={l === 'es' ? 'ES — Español' : 'CA — Català'}
-                  aria-current={locale === l ? 'true' : undefined}
+                  key={language}
+                  to={localPath(withoutLocale(pathname), language) + search + hash}
+                  lang={language}
+                  hrefLang={language}
+                  aria-label={language === 'es' ? 'ES — Español' : 'CA — Català'}
+                  aria-current={locale === language ? 'true' : undefined}
                 >
-                  {l.toUpperCase()}
+                  {language.toUpperCase()}
                 </Link>
               ))}
             </nav>
@@ -108,7 +102,7 @@ function Header() {
           </button>
         </div>
         <nav id="mobile-navigation">
-          {[...navigation, ['/contacto', 'contact'] as const].map(([to, key], i) => (
+          {navigation.map(([to, key], i) => (
             <Link key={to} to={path(to)} onClick={close}>
               <span>0{i + 1}</span>
               {t(`nav.${key}`)}
@@ -116,7 +110,7 @@ function Header() {
             </Link>
           ))}
         </nav>
-        <p className="eyebrow">RECANVIS MARTORELL</p>
+        <p className="eyebrow">{brand.name}</p>
       </dialog>
     </>
   );
@@ -133,9 +127,7 @@ function Footer() {
           </Link>
           <h2>{t('footer.tagline')}</h2>
           <p>{t('footer.text')}</p>
-          <p className="footer-company-data">
-            {business.legalName} · NIF {business.taxId}
-          </p>
+          <p className="footer-company-data">Esparreguera · Piera</p>
         </div>
         <div className="footer-legal">
           <h3>{t('footer.legal')}</h3>
@@ -200,20 +192,6 @@ function ScrollManager() {
 export function Layout() {
   return (
     <>
-      <svg width="0" height="0" aria-hidden="true" style={{ position: 'absolute' }}>
-        <defs>
-          <filter id="corporate-logo-colors" colorInterpolationFilters="sRGB">
-            <feColorMatrix
-              type="matrix"
-              values="0 0 0.2614 0 0.1961  0 0 0.767 0 0.2157  0 0 0.8409 0 0.2431  0 0 0 1 0"
-            />
-          </filter>
-          <filter id="corporate-wordmark-turquoise" colorInterpolationFilters="sRGB">
-            <feFlood floodColor="#60BED2" result="turquoise" />
-            <feComposite in="turquoise" in2="SourceAlpha" operator="in" />
-          </filter>
-        </defs>
-      </svg>
       <Header />
       <main id="main" tabIndex={-1}>
         <Outlet />

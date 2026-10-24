@@ -1,0 +1,9 @@
+Use case: product-mockup.
+Asset type: RE Motorsport website category 07 photograph, landscape 3:2.
+Primary request: create a new photorealistic photograph for "Neumáticos y llantas".
+Input images: Image 1 (brakes) and Image 2 (filters) are style references only. Match their realistic workshop environment, camera, lighting, metal workbench and red accents; replace subjects with tyres and alloy wheels.
+Subject: one upright black performance road tyre fitted on a clean silver multispoke alloy wheel as the main subject, a second bare dark graphite alloy wheel next to it and a spare black road tyre lying flat behind them. Physically plausible wheel geometry, detailed rubber tread and metallic finish. Entire products visible with some breathing room, centered for responsive card cropping.
+Scene: brushed metal workshop workbench foreground, authentic modern automotive workshop softly blurred behind, daylight through windows on left, car with open bonnet subtly visible rear right. Red tool cabinet, red lift columns and thin red workbench edge.
+Color palette: neutral steel silver, charcoal and black with corporate bright red #F80303 accents only on workshop fixtures; natural black rubber and silver metal wheels.
+Lighting: crisp natural commercial product photography, soft side daylight, realistic shadows, depth of field matching the reference photographs.
+Constraints: no text, labels, brands, logos, watermarks, people, prices or artificial neon glow. Illustrative generic scene. High resolution landscape 1536x1024.

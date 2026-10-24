@@ -14,13 +14,13 @@
   margin-top: 18px;
 }
 .site-header {
-  background: linear-gradient(180deg, #32373e, #32373eef);
+  background: linear-gradient(180deg, var(--brand-ink), rgb(from var(--brand-ink) r g b / 0.937));
   border-bottom-color: #ffffff0b;
 }
 .hero {
   height: calc(100svh - 94px);
   min-height: 740px;
-  background: #32373e;
+  background: var(--brand-ink);
 }
 .hero-copy {
   padding-top: 40px;

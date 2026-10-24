@@ -1,0 +1,12 @@
+{
+  "category": "04 · Filtros y mantenimiento",
+  "method": "Built-in image_gen, new image using two existing category photographs as style references",
+  "master": "assets/categories-generated/filtros-master.png",
+  "output": "public/images/categories/filtros-rojo.webp",
+  "width": 960,
+  "height": 640,
+  "bytes": 145842,
+  "primary": "#F80303",
+  "prompt": "docs/category-04-prompt.txt",
+  "illustrative": true
+}

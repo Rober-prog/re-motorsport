@@ -1,0 +1,42 @@
+{
+  "mecanica": {
+    "name": "Motor i distribució",
+    "description": "Corretges, cadenes, bombes i juntes. Prepara la consulta amb les dades del teu motor.",
+    "families": ["Corretges", "Cadenes", "Bombes", "Juntes"]
+  },
+  "frenos": {
+    "name": "Frens",
+    "description": "Consulta la compatibilitat dels components de frenada del teu vehicle.",
+    "families": ["Discos", "Pastilles", "Pinces", "Líquid de frens"]
+  },
+  "suspension": {
+    "name": "Suspensió i direcció",
+    "description": "Amortidors i components de direcció. Cada vehicle necessita la peça adequada.",
+    "families": ["Amortidors", "Molles", "Braços", "Ròtules"]
+  },
+  "filtros": {
+    "name": "Filtres i manteniment",
+    "description": "Descriu què necessites per al manteniment del teu cotxe.",
+    "families": ["Filtres d’oli", "Filtres d’aire", "Filtres d’habitacle", "Lubricants"]
+  },
+  "sistema-electrico": {
+    "name": "Bateries i sistema elèctric",
+    "description": "Consulta per la bateria i els components elèctrics del teu vehicle.",
+    "families": ["Bateries", "Alternadors", "Arrencada", "Sensors"]
+  },
+  "iluminacion": {
+    "name": "Il·luminació",
+    "description": "Consulta fars, bombetes i pilots compatibles amb el teu vehicle.",
+    "families": ["Fars", "Bombetes", "Pilots"]
+  },
+  "neumaticos-llantas": {
+    "name": "Pneumàtics i llandes",
+    "description": "Consulta pneumàtics, llandes i accessoris compatibles amb el teu vehicle.",
+    "families": ["Pneumàtics", "Llandes", "Vàlvules", "Accessoris de roda"]
+  },
+  "transmision": {
+    "name": "Transmissió i embragatge",
+    "description": "Identifica els components de transmissió que busques.",
+    "families": ["Kits d’embragatge", "Paliers", "Juntes"]
+  }
+}

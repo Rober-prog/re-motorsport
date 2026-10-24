@@ -1,53 +1,64 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
+import { loadEnv } from 'vite';
 import { render, paths } from '../.ssr/entry-server.js';
 const template = await fs.readFile('dist/index.html', 'utf8');
-const basePath = process.env.VITE_BASE_PATH || '/';
-const business = JSON.parse(await fs.readFile('src/data/business.json', 'utf8'));
-const fontAssets = await fs.readdir('dist/assets');
-const preloadFonts = fontAssets
-  .filter((file) => /^(inter|manrope)-latin-wght-normal.*\.woff2$/.test(file))
-  .map(
-    (file) =>
-      `<link rel="preload" href="${basePath}assets/${file}" as="font" type="font/woff2" crossorigin />`,
+const env = { ...loadEnv('production', process.cwd(), 'VITE_'), ...process.env };
+const basePath = env.VITE_BASE_PATH || '/';
+const brand = JSON.parse(await fs.readFile('src/config/brand.json', 'utf8'));
+let origin = '';
+try {
+  const url = new URL(env.VITE_SITE_URL || '');
+  if (
+    url.protocol === 'https:' &&
+    url.pathname === '/' &&
+    !url.search &&
+    !url.hash &&
+    !url.username &&
+    !url.password
   )
-  .join('');
+    origin = url.origin;
+} catch {
+  /* Domain remains unconfirmed. */
+}
 const structuredData = JSON.stringify({
   '@context': 'https://schema.org',
   '@graph': [
     {
       '@type': 'WebSite',
-      '@id': 'https://rmartorell.com/#website',
-      url: 'https://rmartorell.com',
-      name: 'Recanvis Martorell',
-      inLanguage: ['ca', 'es'],
+      name: brand.name,
+      inLanguage: ['es-ES', 'ca-ES'],
+      ...(origin ? { url: origin } : {}),
     },
-    {
-      '@type': 'Organization',
-      '@id': 'https://rmartorell.com/#organization',
-      name: 'Recanvis Martorell',
-      url: 'https://rmartorell.com',
-      legalName: business.legalName,
-      taxID: business.taxId,
-      logo: 'https://rmartorell.com/brand/wordmark.webp',
-      sameAs: [business.classicStore],
-      address: {
-        '@type': 'PostalAddress',
-        ...(business.streetNumberConfirmed
-          ? { streetAddress: business.address.streetAddress }
-          : {}),
-        addressLocality: business.address.addressLocality,
-        addressRegion: business.address.addressRegion,
-        postalCode: business.address.postalCode,
-        addressCountry: business.address.addressCountry,
-        // Street number stays omitted until the 4 / 4A discrepancy is resolved.
-      },
-    },
+    ...brand.stores
+      .filter((s) => s.visible && s.status === 'corroborated-public-listings')
+      .map((s) => ({
+        '@type': 'AutoPartsStore',
+        name: `${brand.name} ${s.name}`,
+        telephone: s.phone,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: s.street,
+          postalCode: s.postalCode,
+          addressLocality: s.city,
+          addressRegion: s.region,
+          addressCountry: 'ES',
+        },
+        ...(origin ? { url: `${origin}/tiendas#${s.id}` } : {}),
+      })),
   ],
 });
 const schemaMarkup = `<script type="application/ld+json">${structuredData}</script>`;
-for (const url of [...paths, '/404']) {
+const fontAssets = await fs.readdir('dist/assets');
+const preloadFonts = fontAssets
+  .filter((f) => /^(inter|manrope)-latin-wght-normal.*\.woff2$/.test(f))
+  .map(
+    (f) =>
+      `<link rel="preload" href="${basePath}assets/${f}" as="font" type="font/woff2" crossorigin />`,
+  )
+  .join('');
+for (const url of [...new Set(paths), '/404']) {
   const { html, head, locale } = render(url);
   const output = template
     .replace('lang="es"', `lang="${locale}"`)
@@ -59,34 +70,36 @@ for (const url of [...paths, '/404']) {
   await fs.mkdir(path.dirname(target), { recursive: true });
   await fs.writeFile(target, output);
 }
-const root = 'https://rmartorell.com';
-const entries = paths
-  .filter((url) => !/^\/ca(?:\/|$)/.test(url))
-  .map((url) => `<url><loc>${root}${url}</loc></url>`)
-  .join('\n');
+const canonicalPaths = paths.filter(
+  (url) =>
+    !/^\/es(\/|$)/.test(url) &&
+    !['/aviso-legal', '/privacidad', '/cookies'].includes(url.replace(/^\/ca(?=\/|$)/, '') || '/'),
+);
 await fs.writeFile(
   'dist/sitemap.xml',
-  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${entries}</urlset>`,
+  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${origin ? canonicalPaths.map((url) => `<url><loc>${origin}${url}</loc></url>`).join('\n') : ''}</urlset>`,
 );
 await fs.writeFile(
   'dist/robots.txt',
-  `User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: ${root}/sitemap.xml\n`,
+  origin
+    ? `User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: ${origin}/sitemap.xml\n`
+    : 'User-agent: *\nDisallow: /\n# Dominio y datos legales pendientes.\n',
 );
 const headers = await fs.readFile('dist/_headers', 'utf8');
-const schemaHash = createHash('sha256').update(structuredData).digest('base64');
 await fs.writeFile(
   'dist/_headers',
-  headers.replace("script-src 'self'", `script-src 'self' 'sha256-${schemaHash}'`),
+  headers.replace(
+    "script-src 'self'",
+    `script-src 'self' 'sha256-${createHash('sha256').update(structuredData).digest('base64')}'`,
+  ),
 );
-// The static hero does not ship the retired 3D models or visual reference.
-const distRoot = path.resolve('dist');
-const modelsOutput = path.resolve(distRoot, 'models');
-if (!modelsOutput.startsWith(distRoot + path.sep)) throw new Error('Models output outside dist');
-await fs.rm(modelsOutput, { recursive: true, force: true });
-const referenceOutput = path.resolve(distRoot, 'references');
-if (!referenceOutput.startsWith(distRoot + path.sep))
-  throw new Error('Reference output outside dist');
-await fs.rm(referenceOutput, { recursive: true, force: true });
+// The static site does not ship retired 3D models or reference material.
+for (const relative of ['models', 'references', 'images/categories/neumaticos.webp']) {
+  const distRoot = path.resolve('dist');
+  const target = path.resolve(distRoot, relative);
+  if (!target.startsWith(distRoot + path.sep)) throw new Error('Output outside dist');
+  await fs.rm(target, { recursive: true, force: true });
+}
 console.log(
-  `Prerenderizadas ${paths.length} rutas + 404. HTML comercial disponible sin JavaScript.`,
+  `Prerenderizadas ${new Set(paths).size} rutas y 404. Dominio: ${origin || 'pendiente; indexación desactivada'}.`,
 );

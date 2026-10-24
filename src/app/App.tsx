@@ -10,6 +10,7 @@ import {
   PromotionsPage,
   ClassicsPage,
   ContactPage,
+  StoresPage,
   LegalPage,
   NotFoundPage,
 } from '../pages/ContentPages';
@@ -33,30 +34,33 @@ function Seo() {
       element.content = value;
     };
     meta('name', 'description', seo.description);
-    meta('name', 'robots', seo.found ? 'index,follow' : 'noindex,follow');
+    meta('name', 'robots', seo.indexable ? 'index,follow' : 'noindex,follow');
     meta('property', 'og:title', seo.title);
     meta('property', 'og:description', seo.description);
     meta('property', 'og:url', seo.canonical);
     meta('property', 'og:locale', seo.locale === 'ca' ? 'ca_ES' : 'es_ES');
     meta('name', 'twitter:title', seo.title);
     meta('name', 'twitter:description', seo.description);
-    for (const [key, value] of [
-      ['canonical', seo.canonical],
-      ['es', seo.es],
-      ['ca', seo.ca],
-      ['x-default', seo.ca],
-    ]) {
-      let el = document.head.querySelector<HTMLLinkElement>(
-        key === 'canonical' ? 'link[rel="canonical"]' : `link[hreflang="${key}"]`,
-      );
-      if (!el) {
-        el = document.createElement('link');
-        el.rel = key === 'canonical' ? 'canonical' : 'alternate';
-        if (key !== 'canonical') el.hreflang = key;
-        document.head.append(el);
-      }
-      el.href = value;
+    document.head
+      .querySelectorAll('link[rel="canonical"], link[rel="alternate"]')
+      .forEach((el) => el.remove());
+    if (seo.canonical) {
+      const link = document.createElement('link');
+      link.rel = 'canonical';
+      link.href = seo.canonical;
+      document.head.append(link);
     }
+    if (seo.alternates)
+      for (const [language, href] of Object.entries({
+        ...seo.alternates,
+        'x-default': seo.alternates.es,
+      })) {
+        const link = document.createElement('link');
+        link.rel = 'alternate';
+        link.hreflang = language;
+        link.href = href;
+        document.head.append(link);
+      }
   }, [pathname, i18n]);
   return null;
 }
@@ -68,6 +72,7 @@ export function App() {
         {['', '/es', '/ca'].map((prefix) => (
           <Route key={prefix} element={<Layout />}>
             <Route path={prefix || '/'} element={<HomePage />} />
+            <Route path={`${prefix}/tiendas`} element={<StoresPage />} />
             <Route path={`${prefix}/empresa`} element={<CompanyPage />} />
             <Route path={`${prefix}/catalogo`} element={<CatalogPage />} />
             <Route path={`${prefix}/catalogo/:categoria`} element={<CategoryPage />} />

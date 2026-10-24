@@ -7,11 +7,16 @@ export const baseRoutes = [
   '/promociones',
   '/clasicos',
   '/contacto',
+  '/tiendas',
   '/aviso-legal',
   '/privacidad',
   '/cookies',
 ];
-export const localeFromPath = (path: string): Locale => (/^\/es(?:\/|$)/.test(path) ? 'es' : 'ca');
+export const localeFromPath = (path: string): Locale => {
+  return /^\/ca(?:\/|$)/.test(path) ? 'ca' : 'es';
+};
 export const withoutLocale = (path: string) => path.replace(/^\/(?:ca|es)(?=\/|$)/, '') || '/';
-export const localPath = (path: string, locale: Locale) =>
-  locale === 'es' ? `/es${path === '/' ? '' : path}` : path;
+export const localPath = (path: string, locale: Locale) => {
+  const base = withoutLocale(path);
+  return locale === 'ca' ? `/ca${base === '/' ? '' : base}` : base;
+};

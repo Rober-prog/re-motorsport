@@ -1,0 +1,94 @@
+{
+  "name": "RE-Motorsport",
+  "locale": "es-ES",
+  "identityStatus": "provisional",
+  "officialLogo": false,
+  "legal": { "name": null, "taxId": null, "privacyApproved": false },
+  "palette": {
+    "primary": "#F5B942",
+    "secondary": "#232830",
+    "accent": "#FFE0A0",
+    "ink": "#14171B",
+    "surface": "#1D2229",
+    "muted": "#BFC5CE",
+    "border": "#424A56",
+    "car": "#424A56"
+  },
+  "contact": {
+    "email": { "value": "info@re-motorsport.es", "verified": false, "enabled": false },
+    "whatsapp": { "value": "+34692508355", "verified": false, "enabled": false },
+    "submissionEnabled": false
+  },
+  "stores": [
+    {
+      "id": "esparreguera",
+      "name": "Esparreguera",
+      "visible": true,
+      "status": "corroborated-public-listings",
+      "directlyConfirmed": false,
+      "street": "Avinguda Francesc Macià 123",
+      "postalCode": "08292",
+      "city": "Esparreguera",
+      "region": "Barcelona",
+      "phone": "+34937774713",
+      "phoneLabel": "937 77 47 13",
+      "hours": {
+        "weekdays": "08:30–13:30 y 15:00–19:30",
+        "saturday": "09:00–13:00",
+        "sunday": "Cerrado",
+        "status": "pending-direct-confirmation"
+      },
+      "sources": [
+        "https://www.cylex.es/esparreguera/re-motorsport-grup-sl-12915026.html",
+        "https://firmania.es/esparreguera/re-motorsport-grup-sl-944415",
+        "https://www.paginasamarillas.es/f/esparreguera/re-motorsport-grup-sl_202336855_000000001.html"
+      ],
+      "checkedAt": "2026-10-24"
+    },
+    {
+      "id": "piera",
+      "name": "Piera",
+      "visible": true,
+      "status": "corroborated-public-listings",
+      "directlyConfirmed": false,
+      "street": "Carrer Tarragona 157",
+      "postalCode": "08784",
+      "city": "Piera",
+      "region": "Barcelona",
+      "phone": "+34937426460",
+      "phoneLabel": "937 42 64 60",
+      "hours": {
+        "weekdays": "09:00–13:00 y 15:00–19:00",
+        "saturday": "09:00–13:00",
+        "sunday": "Cerrado",
+        "status": "pending-direct-confirmation"
+      },
+      "sources": [
+        "https://www.cylex.es/piera/re-motorsport-piera-13870849.html",
+        "https://www.datoscif.es/empresa/re-motorsport-grup-sl"
+      ],
+      "checkedAt": "2026-10-24"
+    },
+    {
+      "id": "olesa",
+      "name": "Olesa de Montserrat",
+      "visible": false,
+      "status": "association-unverified",
+      "directlyConfirmed": false,
+      "street": "Carrer Sant Eloi 6",
+      "postalCode": "08640",
+      "city": "Olesa de Montserrat",
+      "region": "Barcelona",
+      "phone": "+34937780620",
+      "phoneLabel": "937 78 06 20",
+      "hours": {
+        "weekdays": "09:00–13:00 y 15:00–19:00",
+        "saturday": "09:00–13:00",
+        "sunday": "Cerrado",
+        "status": "unverified"
+      },
+      "sources": [],
+      "checkedAt": null
+    }
+  ]
+}

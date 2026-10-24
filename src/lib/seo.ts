@@ -1,44 +1,75 @@
 import { resources } from '../locales/resources';
-import { categories } from '../data/categories';
-import { localPath, localeFromPath, withoutLocale } from './routing';
-const origin = 'https://rmartorell.com';
+import { activeCategories } from '../data/categories';
+import { withoutLocale, localeFromPath, localPath } from './routing';
+import { brand, siteOrigin } from '../config/brand';
 export function seoForPath(pathname: string) {
-  const locale = localeFromPath(pathname);
   const path = withoutLocale(pathname).replace(/\/$/, '') || '/';
+  const locale = localeFromPath(pathname);
   const dictionary = resources[locale].translation;
-  const keys: Record<string, keyof typeof dictionary.nav> = {
-    '/': 'home',
-    '/empresa': 'company',
-    '/catalogo': 'catalog',
-    '/profesionales': 'professionals',
-    '/promociones': 'offers',
-    '/clasicos': 'classics',
-    '/contacto': 'contact',
+  const titles: Record<string, string> = {
+    '/': dictionary.seo.home,
+    '/empresa': dictionary.seo.company,
+    '/catalogo': dictionary.seo.catalog,
+    '/tiendas': dictionary.seo.stores,
+    '/contacto': dictionary.seo.contact,
+    '/profesionales': dictionary.seo.professionals,
+    '/promociones': dictionary.seo.offers,
+    '/clasicos': dictionary.seo.classics,
+    '/aviso-legal': dictionary.legal.noticeTitle,
+    '/privacidad': dictionary.legal.privacyTitle,
+    '/cookies': dictionary.legal.cookiesTitle,
   };
-  let title = keys[path] ? dictionary.nav[keys[path]] : undefined;
-  if (path === '/aviso-legal') title = dictionary.legal.noticeTitle;
-  if (path === '/privacidad') title = dictionary.legal.privacyTitle;
-  if (path === '/cookies') title = dictionary.legal.cookiesTitle;
-  const category = categories.find((c) => `/catalogo/${c.slug}` === path);
-  if (category) title = category.name[locale];
-  const found = !!title;
+  const category = activeCategories().find((c) => `/catalogo/${c.slug}` === path);
+  const title = category?.name[locale] || titles[path];
+  const legal = ['/aviso-legal', '/privacidad', '/cookies'].includes(path);
   const description =
     category?.description[locale] ||
-    (path === '/catalogo' ? dictionary.catalog.text : dictionary.hero.subtitle);
+    (path === '/'
+      ? dictionary.seo.homeDescription
+      : `${title || dictionary.seo.notFound}. ${dictionary.hero.subtitle}`);
   return {
     locale,
     path,
-    title: `${title || '404'} · Recanvis Martorell`,
+    title: `${brand.name} | ${title || dictionary.seo.notFound}`,
     description,
-    canonical: `${origin}${localPath(path, locale)}`,
-    es: `${origin}${localPath(path, 'es')}`,
-    ca: `${origin}${localPath(path, 'ca')}`,
-    found,
+    canonical: siteOrigin && title ? `${siteOrigin}${localPath(path, locale)}` : '',
+    alternates:
+      siteOrigin && title
+        ? {
+            es: `${siteOrigin}${localPath(path, 'es')}`,
+            ca: `${siteOrigin}${localPath(path, 'ca')}`,
+          }
+        : null,
+    found: !!title,
+    indexable: !!title && !!siteOrigin && !legal,
   };
 }
 export function headForPath(pathname: string) {
   const seo = seoForPath(pathname);
-  const escape = (s: string) =>
-    s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-  return `<title>${escape(seo.title)}</title>\n<meta name="description" content="${escape(seo.description)}" />\n<meta name="robots" content="${seo.found ? 'index,follow' : 'noindex,follow'}" />\n<link rel="canonical" href="${escape(seo.canonical)}" />\n<link rel="alternate" hreflang="es" href="${escape(seo.es)}" />\n<link rel="alternate" hreflang="ca" href="${escape(seo.ca)}" />\n<link rel="alternate" hreflang="x-default" href="${escape(seo.ca)}" />\n<meta property="og:title" content="${escape(seo.title)}" />\n<meta property="og:description" content="${escape(seo.description)}" />\n<meta property="og:url" content="${escape(seo.canonical)}" />\n<meta property="og:type" content="website" />\n<meta property="og:locale" content="${seo.locale === 'ca' ? 'ca_ES' : 'es_ES'}" />\n<meta property="og:image" content="${origin}/images/social.jpg" />\n<meta name="twitter:card" content="summary_large_image" />\n<meta name="twitter:title" content="${escape(seo.title)}" />\n<meta name="twitter:description" content="${escape(seo.description)}" />\n<meta name="twitter:image" content="${origin}/images/social.jpg" />`;
+  const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  const meta = (name: string, value: string, property = false) =>
+    `<meta ${property ? 'property' : 'name'}="${name}" content="${esc(value)}" />`;
+  return (
+    `<title>${esc(seo.title)}</title>\n` +
+    meta('description', seo.description) +
+    meta('robots', seo.indexable ? 'index,follow' : 'noindex,follow') +
+    (seo.canonical
+      ? `<link rel="canonical" href="${esc(seo.canonical)}" />` +
+        meta('og:url', seo.canonical, true) +
+        (seo.alternates
+          ? `<link rel="alternate" hreflang="es" href="${esc(seo.alternates.es)}" /><link rel="alternate" hreflang="ca" href="${esc(seo.alternates.ca)}" /><link rel="alternate" hreflang="x-default" href="${esc(seo.alternates.es)}" />`
+          : '')
+      : '') +
+    meta('og:title', seo.title, true) +
+    meta('og:description', seo.description, true) +
+    meta('og:type', 'website', true) +
+    meta('og:locale', seo.locale === 'ca' ? 'ca_ES' : 'es_ES', true) +
+    meta('og:site_name', brand.name, true) +
+    meta('og:image', `${siteOrigin}/images/social.jpg`, true) +
+    meta('og:image:alt', resources[seo.locale].translation.seo.imageAlt, true) +
+    meta('twitter:card', 'summary_large_image') +
+    meta('twitter:title', seo.title) +
+    meta('twitter:description', seo.description) +
+    meta('twitter:image', `${siteOrigin}/images/social.jpg`)
+  );
 }

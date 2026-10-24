@@ -1,0 +1,14 @@
+[
+  {
+    "path": "public/images/hero-nissan-gtr-desktop.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 205722
+  },
+  {
+    "path": "public/images/hero-nissan-gtr-mobile.webp",
+    "width": 900,
+    "height": 1350,
+    "bytes": 137236
+  }
+]

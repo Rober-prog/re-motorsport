@@ -1,12 +1,12 @@
-/* Anthracite text keeps the corporate turquoise surfaces readable. */
+/* Accessible emphasis colors are overridden by the current brand theme where needed. */
 .button-primary {
-  background: #60bed2;
+  background: var(--brand-primary);
 }
 .button-primary:hover {
-  background: color-mix(in srgb, var(--turquoise) 88%, white);
+  background: color-mix(in srgb, var(--interactive) 88%, white);
 }
 .contact-banner {
-  background: #60bed2;
+  background: var(--brand-primary);
 }
 .contact-banner .eyebrow {
   color: var(--anthracite);
@@ -14,7 +14,7 @@
 .contact-wordmark,
 .statement-mark,
 .classic-banner > span {
-  color: #60bed2;
+  color: var(--brand-primary);
 }
 .section-description,
 .company-copy > p:not(.eyebrow),

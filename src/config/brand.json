@@ -1,0 +1,130 @@
+{
+  "name": "RE-Motorsport",
+  "locale": "es-ES",
+  "identityStatus": "user-supplied-logo",
+  "officialLogo": true,
+  "legal": {
+    "name": null,
+    "taxId": null,
+    "privacyApproved": false
+  },
+  "palette": {
+    "primary": "#F80303",
+    "secondary": "#212121",
+    "accent": "#FF5252",
+    "ink": "#000000",
+    "surface": "#151515",
+    "muted": "#C3C3C3",
+    "border": "#3D3D3D",
+    "white": "#FFFFFF",
+    "action": "#D50000",
+    "actionHover": "#E00000"
+  },
+  "contact": {
+    "email": {
+      "value": "info@re-motorsport.es",
+      "verified": false,
+      "enabled": false
+    },
+    "whatsapp": {
+      "value": "+34692508355",
+      "verified": false,
+      "enabled": false
+    },
+    "submissionEnabled": false
+  },
+  "stores": [
+    {
+      "id": "esparreguera",
+      "name": "Esparreguera",
+      "visible": true,
+      "status": "corroborated-public-listings",
+      "directlyConfirmed": false,
+      "street": "Avinguda Francesc Macià 123",
+      "postalCode": "08292",
+      "city": "Esparreguera",
+      "region": "Barcelona",
+      "phone": "+34937774713",
+      "phoneLabel": "937 77 47 13",
+      "hours": {
+        "weekdays": "08:30–13:30 y 15:00–19:30",
+        "saturday": "09:00–13:00",
+        "sunday": "Cerrado",
+        "status": "pending-direct-confirmation"
+      },
+      "sources": [
+        "https://www.cylex.es/esparreguera/re-motorsport-grup-sl-12915026.html",
+        "https://firmania.es/esparreguera/re-motorsport-grup-sl-944415",
+        "https://www.paginasamarillas.es/f/esparreguera/re-motorsport-grup-sl_202336855_000000001.html"
+      ],
+      "checkedAt": "2026-10-24"
+    },
+    {
+      "id": "piera",
+      "name": "Piera",
+      "visible": true,
+      "status": "corroborated-public-listings",
+      "directlyConfirmed": false,
+      "street": "Carrer Tarragona 157",
+      "postalCode": "08784",
+      "city": "Piera",
+      "region": "Barcelona",
+      "phone": "+34937426460",
+      "phoneLabel": "937 42 64 60",
+      "hours": {
+        "weekdays": "09:00–13:00 y 15:00–19:00",
+        "saturday": "09:00–13:00",
+        "sunday": "Cerrado",
+        "status": "pending-direct-confirmation"
+      },
+      "sources": [
+        "https://www.cylex.es/piera/re-motorsport-piera-13870849.html",
+        "https://www.datoscif.es/empresa/re-motorsport-grup-sl"
+      ],
+      "checkedAt": "2026-10-24"
+    },
+    {
+      "id": "olesa",
+      "name": "Olesa de Montserrat",
+      "visible": false,
+      "status": "association-unverified",
+      "directlyConfirmed": false,
+      "street": "Carrer Sant Eloi 6",
+      "postalCode": "08640",
+      "city": "Olesa de Montserrat",
+      "region": "Barcelona",
+      "phone": "+34937780620",
+      "phoneLabel": "937 78 06 20",
+      "hours": {
+        "weekdays": "09:00–13:00 y 15:00–19:00",
+        "saturday": "09:00–13:00",
+        "sunday": "Cerrado",
+        "status": "unverified"
+      },
+      "sources": [],
+      "checkedAt": null
+    }
+  ],
+  "logo": {
+    "source": "assets/brand/re-motorsport/logo-original.jpeg",
+    "master": "assets/brand/re-motorsport/logo-restored-master.png",
+    "method": "AI raster reconstruction from supplied business logo; no vector source",
+    "src": "/brand/logo-re-motorsport-1024.png",
+    "width": 2089,
+    "height": 587,
+    "background": "white",
+    "reconstructionApproval": "pending-client-review"
+  },
+  "paletteSource": {
+    "path": "assets/brand/re-motorsport/palette-sampling.json",
+    "status": "sampled-from-user-supplied-jpeg",
+    "supportingColors": "Neutral and accessibility variants are web adaptations, not extra sampled brand colors."
+  },
+  "hero": {
+    "type": "static-image",
+    "desktop": "/images/hero-nissan-gtr-desktop.webp",
+    "mobile": "/images/hero-nissan-gtr-mobile.webp",
+    "vehicle": "Nissan GT-R R35",
+    "scene": "AI-generated illustrative workshop"
+  }
+}

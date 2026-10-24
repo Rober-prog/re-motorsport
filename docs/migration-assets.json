@@ -1,0 +1,27 @@
+{
+  "archived": [
+    "brand",
+    "garage-studio.webp",
+    "hero-garage-mobile.webp",
+    "hero-garage-turquoise-mobile.webp",
+    "hero-garage-turquoise.webp",
+    "hero-garage.webp",
+    "icons",
+    "references",
+    "social.jpg"
+  ],
+  "categoryImages": [
+    "frenos.webp",
+    "iluminacion.webp",
+    "mecanica.webp",
+    "neumaticos.webp",
+    "sistema-electrico.webp",
+    "suspension.webp"
+  ],
+  "originalModels": [
+    "public/models/Lamborghini+Temerario.glb",
+    "public/models/lamborghini-temerario.web.glb"
+  ],
+  "restoredFrom": "3d0f68f",
+  "baseline": "e4bca60"
+}

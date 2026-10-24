@@ -1,3 +1,4 @@
+import brand from '../../src/config/brand.json';
 import { contactSchema } from '../../src/lib/contactSchema';
 interface RateDatabase {
   prepare(sql: string): {
@@ -26,6 +27,8 @@ const json = (body: object, status = 200) =>
   });
 export async function onRequestPost({ request, env }: Context): Promise<Response> {
   if (
+    !brand.contact.submissionEnabled ||
+    !brand.legal.privacyApproved ||
     !env.RESEND_API_KEY ||
     !env.CONTACT_FROM ||
     !env.CONTACT_TO ||

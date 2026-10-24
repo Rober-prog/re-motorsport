@@ -1,22 +1,12 @@
 import { useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import {
-  ArrowUpRight,
-  Building2,
-  Clock3,
-  Mail,
-  MapPin,
-  Phone,
-  Search,
-  SlidersHorizontal,
-  Tag,
-  Wrench,
-} from 'lucide-react';
+import { ArrowUpRight, Search, SlidersHorizontal, Tag, Wrench } from 'lucide-react';
 import { activeCategories, filterCategories } from '../data/categories';
 import { localeFromPath } from '../lib/routing';
 import { assetPath } from '../lib/basePath';
-import { business, businessAddress, businessValues, incorporationDate } from '../lib/business';
+import { businessValues } from '../lib/business';
+import { Stores } from '../components/Stores';
 import {
   ActionLink,
   Breadcrumbs,
@@ -32,7 +22,8 @@ export function CatalogPage() {
   const { t } = useTranslation();
   const [query, setQuery] = useState('');
   const [group, setGroup] = useState('all');
-  const filtered = filterCategories(query, group);
+  const locale = localeFromPath(useLocation().pathname);
+  const filtered = filterCategories(query, group, locale);
   return (
     <>
       <div className="container page-content">
@@ -138,7 +129,7 @@ export function CategoryPage() {
             ) : (
               <>
                 <CategoryIcon name={category.icon} size={190} strokeWidth={0.7} />
-                <span>{String(category.order).padStart(2, '0')} / RM</span>
+                <span>{String(category.order).padStart(2, '0')} / RE</span>
               </>
             )}
           </div>
@@ -163,43 +154,41 @@ export function CategoryPage() {
 }
 export function CompanyPage() {
   const { t } = useTranslation();
-  const locale = localeFromPath(useLocation().pathname);
   return (
     <>
       <div className="container page-content">
         <Breadcrumbs title={t('nav.company')} />
         <PageIntro
-          eyebrow={t('company.eyebrow')}
-          title={t('company.title')}
-          text={t('company.text')}
+          eyebrow={t('workflow.eyebrow')}
+          title={t('workflow.title')}
+          text={t('workflow.text')}
         />
-        <div className="company-statement">
-          <span className="statement-mark" aria-hidden="true">
-            RM.
-          </span>
-          <div>
-            <p>{t('company.detail')}</p>
-            <h2>{t('company.approach')}</h2>
-            <p>{t('company.approachText')}</p>
-          </div>
-        </div>
-        <div className="info-grid">
-          {['history', 'facilities'].map((key) => (
-            <section className="info-card" key={key}>
-              <Building2 size={28} aria-hidden="true" />
-              <h2>{t(`company.${key}`)}</h2>
-              <p>
-                {t(`company.${key}Text`, { ...businessValues, date: incorporationDate(locale) })}
-              </p>
-              {key === 'facilities' && (
-                <PendingNotice>{t('contact.addressNote', businessValues)}</PendingNotice>
-              )}
-            </section>
+        <div className="process-grid">
+          {[1, 2, 3].map((i) => (
+            <article key={i}>
+              <span className="process-number">0{i}</span>
+              <h2>{t(`workflow.step${i}Title`)}</h2>
+              <p>{t(`workflow.step${i}Text`)}</p>
+            </article>
           ))}
         </div>
       </div>
       <ContactBanner />
     </>
+  );
+}
+export function StoresPage() {
+  const { t } = useTranslation();
+  return (
+    <div className="container page-content">
+      <Breadcrumbs title={t('nav.stores')} />
+      <PageIntro
+        eyebrow={t('stores.pageEyebrow')}
+        title={t('stores.pageTitle')}
+        text={t('stores.pageText')}
+      />
+      <Stores />
+    </div>
   );
 }
 export function ProfessionalsPage() {
@@ -244,7 +233,7 @@ export function PromotionsPage() {
           <Tag size={46} strokeWidth={1} />
           <h2>{t('offers.empty')}</h2>
           <p>{t('offers.detail')}</p>
-          <ActionLink to="/contacto">{t('common.contact')}</ActionLink>
+          <ActionLink to="/contacto">{t('nav.contact')}</ActionLink>
         </div>
       </div>
       <ContactBanner />
@@ -262,17 +251,8 @@ export function ClassicsPage() {
         text={t('classics.text')}
       />
       <div className="classic-banner">
-        <span aria-hidden="true">CLASSICS</span>
+        <span aria-hidden="true">{t('nav.classics').toUpperCase()}</span>
         <p>{t('classics.detail', businessValues)}</p>
-        <a
-          className="button button-primary classic-store-link"
-          href={business.classicStore}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {t('classics.visitStore')}
-          <ArrowUpRight size={17} aria-hidden="true" />
-        </a>
       </div>
       <section className="form-section">
         <h2>{t('classics.form')}</h2>
@@ -293,36 +273,12 @@ export function ContactPage() {
       />
       <div className="contact-grid">
         <section className="contact-information">
-          <h2>{t('contact.details')}</h2>
-          {[
-            [MapPin, 'address'],
-            [Phone, 'phone'],
-            [Mail, 'email'],
-            [Clock3, 'hours'],
-          ].map(([Icon, key]) => {
-            const I = Icon as typeof MapPin;
-            return (
-              <div className="contact-detail" key={String(key)}>
-                <I size={20} />
-                <div>
-                  <h3>{t(`contact.${String(key)}`)}</h3>
-                  <p>{key === 'address' ? businessAddress : t('contact.unconfirmed')}</p>
-                  {key === 'address' && (
-                    <p className="contact-address-note">
-                      {t('contact.addressNote', businessValues)}
-                    </p>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-          <div className="contact-wordmark" aria-hidden="true">
-            RM.
-          </div>
+          <h2>{t('form.chooseStore')}</h2>
+          <Stores />
         </section>
         <section>
           <h2 className="form-title">{t('contact.form')}</h2>
-          <ContactForm />
+          <ContactForm initialType="spare" />
         </section>
       </div>
     </div>
@@ -344,8 +300,13 @@ export function LegalPage({ kind }: { kind: 'notice' | 'privacy' | 'cookies' }) 
       {keys.map((key) => (
         <section key={key}>
           <h2>{t(`legal.${key}`)}</h2>
-          <p>{t(`legal.${key}Text`, businessValues)}</p>
-          {key === 'owner' && <p>{t('contact.addressNote', businessValues)}</p>}
+          <p>
+            {t(`legal.${key}Text`, {
+              legalName: t('legal.pendingOwner'),
+              taxId: t('legal.pendingTax'),
+              address: t('legal.pendingAddress'),
+            })}
+          </p>
         </section>
       ))}
     </div>
@@ -358,11 +319,7 @@ export function NotFoundPage() {
       <p className="error-code" aria-hidden="true">
         404
       </p>
-      <PageIntro
-        eyebrow="RECANVIS MARTORELL"
-        title={t('notFound.title')}
-        text={t('notFound.text')}
-      />
+      <PageIntro eyebrow="RE-MOTORSPORT" title={t('notFound.title')} text={t('notFound.text')} />
       <ActionLink to="/">{t('notFound.cta')}</ActionLink>
       <ActionLink to="/catalogo" secondary>
         {t('common.viewCatalog')}

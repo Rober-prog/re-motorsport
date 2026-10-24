@@ -1,0 +1,12 @@
+{
+  "category": "07 · Neumáticos y llantas",
+  "method": "Built-in image_gen, new image using brakes and filters photographs as style references",
+  "master": "assets/categories-generated/neumaticos-llantas-master.png",
+  "output": "public/images/categories/neumaticos-llantas-rojo.webp",
+  "width": 960,
+  "height": 640,
+  "bytes": 141686,
+  "primary": "#F80303",
+  "prompt": "docs/category-07-prompt.txt",
+  "illustrative": true
+}

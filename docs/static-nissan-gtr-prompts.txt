@@ -1,0 +1,21 @@
+Tool: built-in image_gen. Two generated images, no video or 3D.
+Desktop reference: assets/legacy-public/hero-garage-turquoise.webp, photographic style/composition only.
+Desktop master: assets/hero-gtr/desktop-master.png.
+Mobile master: assets/hero-gtr/mobile-master.png; independent portrait composition.
+
+DESKTOP PROMPT
+Use case: photorealistic-natural / automotive advertising hero.
+Asset: wide 16:9 high resolution static website background for RE-Motorsport auto parts business, no rendered text.
+Reference image role: composition, photographic mood and premium workshop lighting only. Create a NEW photo-like image; replace the Porsche entirely with a clearly recognizable Nissan GT-R R35.
+Scene: a pristine contemporary automotive workshop at dusk with polished charcoal concrete floor, dark structural columns and glass workshop partitions, tool cabinets and subtle vertical workshop light strips. This is an illustrative imagined workshop, not a documentary photograph of any business.
+Subject: one graphite metallic Nissan GT-R R35, correct boxy Japanese coupe proportions, sculpted hood, recognizable front grille/headlights, muscular wheel arches, front three-quarter view facing left, car positioned in lower-right area, whole car and all visible wheels fully in frame, black multi-spoke wheels showing visible brake discs and vivid CORPORATE RED brake calipers front and rear, reference red #F80303 / RGB 248,3,3. Realistic mechanical details, no invented wheel structures.
+Composition: wide landscape 16:9. Low camera at headlight height, elegant near-level perspective. Leave the upper-left 40% of frame mostly dark charcoal negative space for actual HTML headline. Car spans approx x=35% to 95%, y=35% to 85%. Maintain plenty of visible workshop floor and clean breathing room around the whole vehicle.
+Palette: graphite, deep neutral black, brushed silver, white strip-light reflections; vivid true red #F80303 accents in the brake calipers, discreet workshop cabinets, red vertical LED details and subtle red reflections in the floor and rear workshop. NO turquoise, teal, blue, cyan, orange or yellow accent lighting. Red accents must look physically integrated, not an overall red color cast.
+Photographic style: high-end automotive editorial photography, tack-sharp realistic vehicle, rich neutral graphite paint, controlled soft white overhead highlights, detailed wheel spokes and clear red calipers, polished floor reflections, dramatic yet readable workshop, subtle depth of field in background only. No motion blur, no added blur on the car.
+Avoid: Porsche, Lamborghini, racing track, people, watermarks, typography, text, brand banners, business signage, license-plate text, oversized logos, smoke, fire, excessive neon, clipped bumpers or wheels. Do not add the RE business logo to the image. Output one clean usable photograph-like background.
+
+MOBILE PROMPT
+Create a PORTRAIT 2:3 mobile website hero companion to the just-created graphite Nissan GT-R workshop image. Reference image role: exact vehicle identity, same GT-R R35, workshop materials and lighting style.
+Keep the same graphite metallic Nissan GT-R R35, black multi-spoke wheels and prominent bright RED #F80303 brake calipers, in a premium dark workshop with physically integrated red light strips, red tool cabinets, red accents, neutral white overhead reflections. No turquoise accents. Static photorealistic advertising photograph, sharp car.
+Recompose specifically for a narrow mobile screen: UPPER 55 percent must be mostly deep charcoal dark wall and subtle dark workshop architecture, spacious quiet negative space for HTML headline and buttons. LOWER 45 percent shows the ENTIRE GT-R facing left in front three-quarter view. Fit the full vehicle and both visible wheels comfortably within the width with margins, no bumper or wheel cutoffs. Natural perspective, whole car on floor, red calipers clearly visible, a little reflection beneath. The workshop is imagined and illustrative.
+Do not include any text, banners, business logo, watermark, people, motion blur or animation. Do not add a different car. One portrait image only.

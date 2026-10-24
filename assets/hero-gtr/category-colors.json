@@ -1,0 +1,37 @@
+[
+  {
+    "original": "assets/legacy-public/categories/mecanica.webp",
+    "output": "public/images/categories/mecanica-rojo.webp",
+    "primary": "#F80303",
+    "recoloredPixels": 203845,
+    "bytes": 167402
+  },
+  {
+    "original": "assets/legacy-public/categories/frenos.webp",
+    "output": "public/images/categories/frenos-rojo.webp",
+    "primary": "#F80303",
+    "recoloredPixels": 350386,
+    "bytes": 105282
+  },
+  {
+    "original": "assets/legacy-public/categories/suspension.webp",
+    "output": "public/images/categories/suspension-rojo.webp",
+    "primary": "#F80303",
+    "recoloredPixels": 257587,
+    "bytes": 138052
+  },
+  {
+    "original": "assets/legacy-public/categories/sistema-electrico.webp",
+    "output": "public/images/categories/sistema-electrico-rojo.webp",
+    "primary": "#F80303",
+    "recoloredPixels": 285893,
+    "bytes": 135054
+  },
+  {
+    "original": "assets/legacy-public/categories/iluminacion.webp",
+    "output": "public/images/categories/iluminacion-rojo.webp",
+    "primary": "#F80303",
+    "recoloredPixels": 297316,
+    "bytes": 173304
+  }
+]

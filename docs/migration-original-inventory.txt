@@ -1,0 +1,81 @@
+HEAD:.env.example:7:ALLOWED_ORIGIN=https://rmartorell.com
+HEAD:public/icons/favicon.svg:1:<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#32373e"/><path fill="#60bed2" d="M13 17h23c12 0 18 6 18 15 0 7-4 12-10 14l9 10H39L25 39h11c5 0 7-2 7-6s-2-6-7-6H24v29H13z"/></svg>
+HEAD:scripts/prerender.mjs:21:      '@id': 'https://rmartorell.com/#website',
+HEAD:scripts/prerender.mjs:22:      url: 'https://rmartorell.com',
+HEAD:scripts/prerender.mjs:23:      name: 'Recanvis Martorell',
+HEAD:scripts/prerender.mjs:28:      '@id': 'https://rmartorell.com/#organization',
+HEAD:scripts/prerender.mjs:29:      name: 'Recanvis Martorell',
+HEAD:scripts/prerender.mjs:30:      url: 'https://rmartorell.com',
+HEAD:scripts/prerender.mjs:33:      logo: 'https://rmartorell.com/brand/wordmark.webp',
+HEAD:scripts/prerender.mjs:62:const root = 'https://rmartorell.com';
+HEAD:src/components/layout/Layout.tsx:34:        alt="Recanvis Martorell"
+HEAD:src/components/layout/Layout.tsx:119:        <p className="eyebrow">RECANVIS MARTORELL</p>
+HEAD:src/components/layout/Layout.tsx:212:            <feFlood floodColor="#60BED2" result="turquoise" />
+HEAD:src/data/business.json:2:  "name": "Recanvis Martorell",
+HEAD:src/data/business.json:3:  "legalName": "RECANVIS MARTORELL SL",
+HEAD:src/data/business.json:4:  "taxId": "B60408010",
+HEAD:src/data/business.json:11:    "addressLocality": "Martorell",
+HEAD:src/data/business.json:25:  "corporateWebsite": "https://www.rmartorell.com",
+HEAD:src/data/business.json:28:    "municipal": "https://moliempresa.martorell.cat/directori-empreses/recanvis-martorell/",
+HEAD:src/data/business.json:30:    "companyDirectory": "https://www.iberinform.es/empresa/1388746/recanvis-martorell"
+HEAD:src/lib/seo.ts:4:const origin = 'https://rmartorell.com';
+HEAD:src/lib/seo.ts:31:    title: `${title || '404'} · Recanvis Martorell`,
+HEAD:src/locales/resources.ts:74:        companyEyebrow: '02 / RECANVIS MARTORELL',
+HEAD:src/locales/resources.ts:77:          'Recambios y accesorios para el automóvil en Martorell, Barcelona. Para quienes trabajan con vehículos. Y para quienes disfrutan de ellos.',
+HEAD:src/locales/resources.ts:78:        companyLink: 'Conoce Recanvis Martorell',
+HEAD:src/locales/resources.ts:119:        text: 'Recanvis Martorell: venta de recambios y accesorios para el automóvil en Martorell, Barcelona.',
+HEAD:src/locales/resources.ts:125:        facilities: 'En Martorell',
+HEAD:src/locales/resources.ts:154:        text: 'La tienda especializada de Recanvis Martorell en recambiosclasicos.com.',
+HEAD:src/locales/resources.ts:188:        success: 'Consulta enviada. Gracias por contactar con Recanvis Martorell.',
+HEAD:src/locales/resources.ts:223:        copyright: 'Recanvis Martorell. Todos los derechos reservados.',
+HEAD:src/locales/resources.ts:236:          'Titular: {{legalName}}, sociedad limitada. NIF: {{taxId}}. Dirección publicada: {{address}}. Web corporativa: www.rmartorell.com.',
+HEAD:src/locales/resources.ts:338:        companyEyebrow: '02 / RECANVIS MARTORELL',
+HEAD:src/locales/resources.ts:341:          'Recanvis i accessoris per a l’automòbil a Martorell, Barcelona. Per a qui treballa amb vehicles. I per a qui en gaudeix.',
+HEAD:src/locales/resources.ts:342:        companyLink: 'Coneix Recanvis Martorell',
+HEAD:src/locales/resources.ts:383:        text: 'Recanvis Martorell: venda de recanvis i accessoris per a l’automòbil a Martorell, Barcelona.',
+HEAD:src/locales/resources.ts:389:        facilities: 'A Martorell',
+HEAD:src/locales/resources.ts:419:        text: 'La botiga especialitzada de Recanvis Martorell a recambiosclasicos.com.',
+HEAD:src/locales/resources.ts:453:        success: 'Consulta enviada. Gràcies per contactar amb Recanvis Martorell.',
+HEAD:src/locales/resources.ts:488:        copyright: 'Recanvis Martorell. Tots els drets reservats.',
+HEAD:src/locales/resources.ts:501:          'Titular: {{legalName}}, societat limitada. NIF: {{taxId}}. Adreça publicada: {{address}}. Web corporativa: www.rmartorell.com.',
+HEAD:src/pages/ContentPages.tsx:362:        eyebrow="RECANVIS MARTORELL"
+HEAD:src/pages/HomePage.tsx:14:          <p className="eyebrow">RECANVIS MARTORELL</p>
+HEAD:src/pages/HomePage.tsx:107:                MARTORELL
+HEAD:src/styles/accessibility.css:3:  background: #60bed2;
+HEAD:src/styles/accessibility.css:9:  background: #60bed2;
+HEAD:src/styles/accessibility.css:17:  color: #60bed2;
+HEAD:src/styles/global.css:29:  --turquoise: #60bed2;
+HEAD:src/styles/global.css:121:  outline: 2px solid #60bed2;
+HEAD:src/styles/global.css:167:  box-shadow: 0 5px 28px #60bed213;
+HEAD:src/styles/global.css:171:  box-shadow: 0 6px 30px #60bed238;
+HEAD:src/styles/global.css:181:  border-color: #60bed288;
+HEAD:src/styles/global.css:310:  box-shadow: 0 0 12px #60bed288;
+HEAD:src/styles/global.css:498:  border-color: #60bed266;
+HEAD:src/styles/global.css:523:  background: radial-gradient(ellipse at 50% 70%, #60bed214, transparent 65%);
+HEAD:src/styles/global.css:556:  color: #60bed2;
+HEAD:src/styles/global.css:563:  border: 1px solid #60bed215;
+HEAD:src/styles/global.css:628:  background: #60bed220;
+HEAD:src/styles/global.css:641:  border: 1px solid #60bed251;
+HEAD:src/styles/global.css:646:    0 0 60px #60bed214,
+HEAD:src/styles/global.css:653:  border: 16px double #60bed25c;
+HEAD:src/styles/global.css:662:  border: 3px double #60bed255;
+HEAD:src/styles/global.css:668:  border: 1px solid #60bed255;
+HEAD:src/styles/global.css:684:  color: #60bed2;
+HEAD:src/styles/global.css:708:  color: #60bed2;
+HEAD:src/styles/global.css:756:  border: 1px solid #60bed21c;
+HEAD:src/styles/global.css:782:  color: #60bed266;
+HEAD:src/styles/global.css:809:  box-shadow: 0 0 120px #60bed244;
+HEAD:src/styles/global.css:810:  border: 1px solid #60bed216;
+HEAD:src/styles/global.css:854:  background: #60bed2;
+HEAD:src/styles/global.css:1188:  color: #60bed2;
+HEAD:src/styles/global.css:1400:  border: 1px solid #60bed22a;
+HEAD:src/styles/global.css:1448:  outline: 2px solid #60bed222;
+HEAD:src/styles/global.css:1476:  accent-color: #60bed2;
+HEAD:src/styles/global.css:1487:  color: #60bed2;
+HEAD:src/styles/global.css:1552:  color: #60bed233;
+HEAD:src/styles/staticHero.css:30:  filter: brightness(0) invert(1) drop-shadow(0 0 3px #ffffff80) drop-shadow(0 0 10px #60bed280)
+HEAD:src/styles/staticHero.css:31:    drop-shadow(0 0 22px #60bed240);
+HEAD:src/tests/contact-api.test.ts:19:  ALLOWED_ORIGIN: 'https://rmartorell.com',
+HEAD:src/tests/contact-api.test.ts:25:const request = (data: unknown = payload, origin = 'https://rmartorell.com') =>
+HEAD:src/tests/contact-api.test.ts:26:  new Request('https://rmartorell.com/api/contact', {
+HEAD:wrangler.jsonc:3:  "name": "recanvis-martorell",

@@ -1,0 +1,453 @@
+/* Layout for the RE-Motorsport proposal; palette generated from brand.json. */
+:root {
+  --bg: var(--brand-ink);
+  --surface: var(--brand-surface);
+  --night: var(--brand-surface);
+  --interactive: var(--brand-accent);
+  --anthracite: var(--brand-ink);
+  --muted: var(--brand-muted);
+  --border: var(--brand-border);
+  background: var(--brand-ink);
+}
+body {
+  background: var(--brand-ink);
+  color: #f7f8fa;
+}
+.site-header {
+  background: rgb(from var(--brand-ink) r g b / 0.96);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-white);
+  padding: 8px 12px;
+  border-radius: 5px;
+  line-height: 0;
+}
+.brand strong {
+  font-family: var(--heading);
+  font-size: 26px;
+  letter-spacing: -1.4px;
+  line-height: 1.2;
+  text-transform: none;
+  font-weight: 800;
+  color: #fff;
+}
+.brand strong span {
+  color: var(--brand-primary);
+}
+.brand small {
+  font-size: 8px;
+  letter-spacing: 2.4px;
+  color: var(--brand-muted);
+}
+.brand-featured {
+  width: auto;
+}
+.brand-logo {
+  display: block;
+  width: 204px;
+  height: auto;
+  object-fit: contain;
+}
+.brand-featured .brand-logo {
+  width: 286px;
+}
+.brand-featured strong {
+  font-size: 36px;
+}
+.desktop-nav a {
+  font-size: 12px;
+}
+.header-contact.button {
+  font-size: 11px;
+}
+.re-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 840px;
+  height: calc(100svh - 94px);
+  max-height: 1100px;
+  background:
+    radial-gradient(
+      ellipse at 70% 66%,
+      rgb(from var(--brand-primary) r g b / 0.06),
+      transparent 47%
+    ),
+    var(--brand-ink);
+}
+.re-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(115deg, transparent 0 200px, #ffffff03 200px 201px);
+}
+.re-hero .hero-copy {
+  position: relative;
+  z-index: 3;
+  padding-top: 60px;
+  pointer-events: none;
+}
+.re-hero .hero-copy > * {
+  pointer-events: auto;
+}
+.re-hero h1 {
+  font-size: clamp(44px, 4.7vw, 78px);
+  max-width: 1020px;
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+}
+.re-hero h1 span {
+  color: var(--brand-primary);
+}
+.re-hero .hero-subtitle {
+  max-width: 510px;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.re-hero .hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 25px;
+}
+.hero-locations {
+  margin-top: 24px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+.hero-locations span {
+  color: var(--brand-primary);
+  padding: 0 10px;
+}
+.hero-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 4;
+  pointer-events: none;
+}
+.hero-bottom a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+}
+.hero-bottom a {
+  pointer-events: auto;
+}
+.hero-bottom > span {
+  font-size: 9px;
+  color: var(--brand-muted);
+}
+.categories-section,
+.company-section,
+.professionals-section {
+  background: var(--brand-ink);
+}
+.category-card {
+  background: var(--brand-surface);
+  border-color: var(--border);
+}
+.category-card:hover {
+  background: var(--brand-secondary);
+  border-color: var(--brand-primary);
+}
+.category-card h3,
+.catalog-grid .category-card h3 {
+  font-size: 17px;
+}
+.category-card p,
+.catalog-grid .category-card p {
+  font-size: 13px;
+  line-height: 1.65;
+}
+.category-illustration {
+  background: radial-gradient(
+    ellipse at center,
+    rgb(from var(--brand-primary) r g b / 0.06),
+    transparent 75%
+  );
+}
+.process-section {
+  background: var(--brand-surface);
+  border-block: 1px solid var(--border);
+}
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+}
+.process-number {
+  display: block;
+  color: var(--brand-primary);
+  font-size: 38px;
+  letter-spacing: -2px;
+  margin-bottom: 32px;
+}
+.process-grid h3,
+.process-grid h2 {
+  font-size: 23px;
+  margin-bottom: 14px;
+}
+.process-grid p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.store-card {
+  background: var(--brand-surface);
+  border: 1px solid var(--border);
+  padding: 38px;
+  border-radius: 8px;
+}
+.store-card h2 {
+  font-size: 36px;
+  margin: 20px 0 24px;
+}
+.store-address {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.store-address svg {
+  margin-top: 3px;
+}
+.store-phone {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--heading);
+  font-size: 25px;
+  margin: 24px 0;
+  color: var(--brand-accent);
+}
+.store-hours {
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.8;
+}
+.store-hours > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 5px 0;
+}
+.store-hours dt {
+  color: var(--muted);
+}
+.store-hours dd {
+  margin: 0;
+  text-align: right;
+}
+.hours-note {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 18px 0 25px;
+}
+.contact-information {
+  display: block;
+}
+.contact-information .store-grid {
+  grid-template-columns: 1fr;
+}
+.contact-information .store-card {
+  padding: 25px;
+  margin-bottom: 15px;
+}
+.contact-information .store-card h2 {
+  font-size: 27px;
+  margin: 15px 0;
+}
+.store-call {
+  margin: 16px 0 0 12px;
+}
+.form-notice p,
+.consent,
+.form-feedback,
+.pending-note {
+  font-size: 13px;
+  line-height: 1.8;
+}
+.form-field > label {
+  font-size: 14px;
+}
+.form-field input,
+.form-field select,
+.form-field textarea {
+  font-size: 16px;
+  background: var(--brand-surface);
+}
+.mobile-menu {
+  background: var(--brand-ink);
+}
+.site-footer {
+  background: var(--brand-ink);
+}
+.footer-development {
+  font-size: 12px;
+}
+.button-primary {
+  background: var(--brand-action);
+  color: var(--brand-white);
+}
+.button-primary:hover {
+  background: var(--brand-actionHover);
+}
+.contact-banner {
+  background: var(--brand-primary);
+  color: var(--brand-ink);
+}
+.contact-banner p,
+.contact-banner .eyebrow {
+  color: var(--brand-ink);
+}
+.contact-banner .button {
+  background: var(--brand-ink);
+  color: #fff;
+}
+.contact-banner .button:hover {
+  background: var(--brand-secondary);
+}
+:focus-visible {
+  outline: 3px solid var(--brand-primary);
+  outline-offset: 5px;
+}
+.contact-banner :focus-visible {
+  outline-color: var(--brand-ink);
+}
+@media (max-width: 959px) {
+  .re-hero {
+    min-height: 1020px;
+    height: auto;
+  }
+  .re-hero .hero-copy {
+    padding-top: 42px;
+  }
+  .store-card {
+    padding: 26px;
+  }
+  .process-grid {
+    gap: 24px;
+  }
+}
+@media (max-width: 639px) {
+  .brand {
+    padding: 7px 10px;
+  }
+  .brand-logo {
+    width: 168px;
+  }
+  .brand-featured .brand-logo {
+    width: 250px;
+  }
+  .brand strong {
+    font-size: 22px;
+  }
+  .brand small {
+    font-size: 7px;
+    letter-spacing: 1.8px;
+  }
+  .brand-featured strong {
+    font-size: 30px;
+  }
+  .re-hero {
+    min-height: 970px;
+    max-height: none;
+  }
+  .re-hero .hero-copy {
+    padding-top: 34px;
+  }
+  .re-hero h1 {
+    font-size: clamp(35px, 9.4vw, 52px);
+  }
+  .re-hero .hero-copy .eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.6px;
+    margin-bottom: 22px;
+  }
+  .re-hero .hero-subtitle {
+    font-size: 14px;
+    line-height: 1.75;
+    margin-top: 20px;
+  }
+  .re-hero .hero-actions {
+    gap: 20px;
+    margin-top: 22px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .re-hero .hero-actions .button {
+    font-size: 12px;
+    min-height: 46px;
+  }
+  .re-hero .hero-actions .text-link {
+    font-size: 13px;
+  }
+  .re-hero .hero-bottom {
+    bottom: 20px;
+    font-size: 10px;
+  }
+  .re-hero .hero-bottom > span {
+    display: none;
+  }
+  .hero-locations {
+    font-size: 9px;
+  }
+  .process-grid,
+  .store-grid {
+    grid-template-columns: 1fr;
+  }
+  .process-grid article {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+  }
+  .process-number {
+    margin-bottom: 18px;
+  }
+  .store-card h2 {
+    font-size: 30px;
+  }
+  .store-hours > div {
+    flex-direction: column;
+    gap: 0;
+  }
+  .store-hours dd {
+    text-align: left;
+  }
+  .category-card h3,
+  .catalog-grid .category-card h3 {
+    font-size: 14px;
+  }
+  .category-card p,
+  .catalog-grid .category-card p {
+    font-size: 12px;
+  }
+  .store-call {
+    margin-left: 0;
+    font-size: 12px;
+    gap: 8px;
+  }
+  .intro-text,
+  .section-description,
+  .contact-banner p:not(.eyebrow) {
+    font-size: 14px;
+  }
+}

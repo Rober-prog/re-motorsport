@@ -8,10 +8,11 @@ import { App } from './app/App';
 import { ErrorBoundary } from './components/ui/Primitives';
 import './styles/global.css';
 import './styles/accessibility.css';
-import './styles/showroom.css';
 import './styles/brand.css';
-import './styles/staticHero.css';
+import './styles/re-motorsport.css';
 import './styles/footer.css';
+import './styles/staticHero.css';
+import './styles/languages.css';
 const locale = localeFromPath(appPath(window.location.pathname));
 const i18n = createI18n(locale);
 function Root() {

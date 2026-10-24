@@ -15,11 +15,11 @@ const valid = {
 describe('Catálogo', () => {
   it('las categorías activas tienen identificadores y rutas únicos', () => {
     const categories = activeCategories();
-    expect(new Set(categories.map((category) => category.id)).size).toBe(11);
-    expect(new Set(categories.map((category) => category.slug)).size).toBe(11);
+    expect(new Set(categories.map((category) => category.id)).size).toBe(8);
+    expect(new Set(categories.map((category) => category.slug)).size).toBe(8);
   });
   it('busca sin acentos y por familias, respetando filtros', () => {
-    expect(filterCategories('mecanica', 'all').map((c) => c.id)).toEqual(['mecanica']);
+    expect(filterCategories('distribucion', 'all').map((c) => c.id)).toEqual(['mecanica']);
     expect(filterCategories('Pastillas', 'mechanics')[0].id).toBe('frenos');
     expect(filterCategories('pastillas', 'maintenance')).toHaveLength(0);
     expect(filterCategories('no-existe', 'all')).toHaveLength(0);
@@ -73,15 +73,17 @@ describe('Validación de consultas', () => {
 });
 describe('Rutas localizadas', () => {
   it('conserva la ruta al cambiar de idioma', () => {
-    expect(localPath('/catalogo/frenos', 'ca')).toBe('/catalogo/frenos');
-    expect(localPath('/catalogo/frenos', 'es')).toBe('/es/catalogo/frenos');
-    expect(localPath('/', 'es')).toBe('/es');
+    expect(localPath('/catalogo/frenos', 'ca')).toBe('/ca/catalogo/frenos');
+    expect(localPath('/', 'ca')).toBe('/ca');
+    expect(localPath('/ca/catalogo/frenos', 'es')).toBe('/catalogo/frenos');
+    expect(localPath('/catalogo/frenos', 'es')).toBe('/catalogo/frenos');
+    expect(localPath('/', 'es')).toBe('/');
     expect(withoutLocale('/ca/catalogo/frenos')).toBe('/catalogo/frenos');
     expect(withoutLocale('/es/catalogo/frenos')).toBe('/catalogo/frenos');
-    expect(localeFromPath('/')).toBe('ca');
-    expect(localeFromPath('/catalogo')).toBe('ca');
+    expect(localeFromPath('/')).toBe('es');
+    expect(localeFromPath('/catalogo')).toBe('es');
     expect(localeFromPath('/ca')).toBe('ca');
     expect(localeFromPath('/es/catalogo/carroceria')).toBe('es');
-    expect(localeFromPath('/escape')).toBe('ca');
+    expect(localeFromPath('/escape')).toBe('es');
   });
 });

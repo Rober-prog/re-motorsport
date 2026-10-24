@@ -1,21 +1,7 @@
-import business from '../data/business.json';
-import type { Locale } from '../data/categories';
-
-export { business };
-export const businessAddress = `${business.address.streetAddress}, ${business.address.postalCode} ${business.address.addressLocality}, ${business.address.addressRegion}`;
+import { brand } from '../config/brand';
+export const business = brand;
 export const businessValues = {
-  legalName: business.legalName,
-  taxId: business.taxId,
-  address: businessAddress,
-  variant: business.addressVariant,
-  cnae: business.cnaePublished,
-  ...business.registry,
+  legalName: '[TITULAR PENDIENTE DE VALIDAR]',
+  taxId: '[NIF PENDIENTE DE VALIDAR]',
+  address: '[DOMICILIO LEGAL PENDIENTE DE VALIDAR]',
 };
-export function incorporationDate(locale: Locale) {
-  return new Intl.DateTimeFormat(locale === 'ca' ? 'ca-ES' : 'es-ES', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-    timeZone: 'UTC',
-  }).format(new Date(`${business.incorporationDate}T00:00:00Z`));
-}

@@ -5,13 +5,13 @@ import { App } from './app/App';
 import { createI18n } from './lib/i18n';
 import { localeFromPath } from './lib/routing';
 import { headForPath } from './lib/seo';
-import { baseRoutes, localPath } from './lib/routing';
+import { baseRoutes } from './lib/routing';
 import { activeCategories } from './data/categories';
 import { assetPath, routerBasename } from './lib/basePath';
 export const paths = [
   ...baseRoutes,
   ...activeCategories().map((c) => `/catalogo/${c.slug}`),
-].flatMap((path) => [path, localPath(path, 'es'), `/ca${path === '/' ? '' : path}`]);
+].flatMap((path) => [path, `/es${path === '/' ? '' : path}`, `/ca${path === '/' ? '' : path}`]);
 export function render(path: string) {
   const locale = localeFromPath(path);
   const i18n = createI18n(locale);
