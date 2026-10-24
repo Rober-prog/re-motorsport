@@ -22,7 +22,7 @@ La portada utiliza dos imágenes estáticas generadas de un Nissan GT-R R35 con 
 | --- | --- |
 | `src/config/brand.json` | Nombre, logo aportado, colores extraídos, tiendas, horarios, estados de validación y canales |
 | `src/config/brand.ts` | Visibilidad de tiendas, mapas y dominio configurable |
-| `src/data/categories.ts` | Nueve familias editoriales, sin inventario real |
+| `src/data/categories.ts` | Ocho familias editoriales, sin inventario real |
 | `scripts/prepare-static-hero.mjs` | Exportaciones optimizadas de los maestros de escritorio y móvil |
 | `src/locales/resources.ts` | Textos españoles; alias de idiomas antiguos |
 | `src/components/forms/ContactForm.tsx` | Preparación de consulta y llamada a la tienda |
@@ -36,8 +36,8 @@ El formulario permite preparar datos sin enviarlos ni persistirlos. La llamada t
 
 ## Restauración y publicación
 
-Punto de partida: commit `e4bca60`, conservado en el historial. Trabajo en la rama local `re-motorsport-local`. Los originales están en `assets/brand/originals`, `assets/legacy-public` y `assets/retired-3d`; los modelos y componentes antiguos no forman parte del sitio ni del build. No se ha tocado el proyecto original ni publicado nada.
+Punto de partida: commit `e4bca60`, conservado en el historial. Rama de trabajo y publicación: `re-motorsport-local`. Los originales están en `assets/brand/originals`, `assets/legacy-public` y `assets/retired-3d`; los modelos y componentes antiguos no forman parte del sitio ni del build. El proyecto original de Recanvis Martorell conserva su repositorio independiente.
 
-La automatización de Pages heredada se conserva como `.github/workflows/pages.yml.disabled`. No reactivarla hasta aprobación de publicación y cierre de pendientes. Las imágenes actuales son composiciones ilustrativas generadas para este proyecto. El material del antiguo visor está archivado y no se sirve.
+GitHub Pages se publica mediante `.github/workflows/pages.yml` desde la rama `re-motorsport-local`. El flujo ejecuta las pruebas, compila con la ruta base `/re-motorsport/` obtenida de Pages y publica únicamente `dist`. En Settings → Pages debe seleccionarse GitHub Actions como origen. Las imágenes actuales son composiciones ilustrativas generadas para este proyecto. El material del antiguo visor está archivado y no se sirve.
 
 Consultar [auditoría de marca](BRAND_AUDIT.md), [informe de migración](MIGRATION_REPORT.md) y [datos pendientes](PENDIENTE_CLIENTE.md). Los documentos, scripts y capturas anteriores en `docs` son históricos y pueden describir la marca original; no son instrucciones vigentes para publicar esta copia. Las pruebas anteriores están archivadas en `docs/legacy-tests`.
